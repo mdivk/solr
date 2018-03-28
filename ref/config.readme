@@ -1,0 +1,14 @@
+CSV Formatted Index 
+
+CSV formatted update requests may be sent to Solr’s /update handler using Content-Type: application/csv or Content-Type: text/csv.
+A sample CSV file is provided at example/exampledocs/books.csv that you can use to add some documents to the Solr techproducts example:
+curl 'http://localhost:8983/solr/my_collection/update?commit=true' --data-binary @example/exampledocs/books.csv -H 'Content-type:application/csv'
+
+CSV Update Convenience Paths
+In addition to the /update handler, there is an additional CSV specific request handler path available by default in Solr, that implicitly override the behavior of some request parameters:
+
+/update/csv	    stream.contentType=application/csv
+
+CSV Update Parameters
+parameter Usage  Example    
+separator	Character used as field separator; default is ","   separator=%09
