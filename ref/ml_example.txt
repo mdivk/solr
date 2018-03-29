@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<citiml:citimlTradeNotification
+    xmlns:citiml="http://tradecapturesys.cmb.citigroup.net/citiml-2-0"
+    xmlns:citimlcommon="http://tradecapturesys.cmb.citigroup.net/citiml-common-2-0"
+    xmlns:citisdrre="http://www.citi.com/citisdrre-fpml/recordkeeping"
+    xmlns:dtcc="http://www.dtcc.com/ext"
+    xmlns:fpml="http://www.fpml.org/FpML-5/recordkeeping"
+    xmlns:ns10="http://tradecapturesys.cmb.citigroup.net/citiml-payload-2-0"
+    xmlns:ns11="http://tradecapturesys.cmb.citigroup.net/citiml-eqd-extended-2-0"
+    xmlns:ns12="http://tradecapturesys.cmb.citigroup.net/citiml-cds-extended-2-0"
+    xmlns:ns13="http://tradecapturesys.cmb.citigroup.net/citiml-bond-option-extended-2-0"
+    xmlns:ns14="http://tradecapturesys.cmb.citigroup.net/citiml-com-extended-2-0"
+    xmlns:ns15="http://tradecapturesys.cmb.citigroup.net/citiml-eq-shared-extended-2-0"
+    xmlns:ns16="http://tradecapturesys.cmb.citigroup.net/citiml-return-swaps-extended-2-0"
+    xmlns:ns17="http://util.fxpg.tcmt.citi.com"
+    xmlns:ns6="http://www.w3.org/2000/09/xmldsig#"
+    xmlns:ns7="http://tradecapturesys.cmb.citigroup.net/citiml-irex-extended-2-0"
+    xmlns:ns8="http://tradecapturesys.cmb.citigroup.net/citiml-fx-extended-2-0" xmlns:ns9="http://tradecapturesys.cmb.citigroup.net/citiml-ird-extended-2-0">
+    <citiml:citimlTradeNotificationMessageHeader>
+        <citiml:citimlMessageId messageIdScheme="FXLMREG">fd79a9cc-5c1f-44bf-aef8-ce2432c06e23-156970:201001806503496-1</citiml:citimlMessageId>
+        <citiml:citimlSentBy messageAddressScheme="FXLMREG">FXLMREG</citiml:citimlSentBy>
+        <citiml:citimlCreationTimestamp>2018-03-06T06:09:10.004Z</citiml:citimlCreationTimestamp>
+        <citiml:citimlOriginatingSystemName>EDN</citiml:citimlOriginatingSystemName>
+        <citiml:isSDRReportable>false</citiml:isSDRReportable>
+    </citiml:citimlTradeNotificationMessageHeader>
+    <citiml:citimlNotificationBundleDetails>
+        <citiml:citimlEvents>
+            <citiml:citimlEvent>
+                <citiml:nonpublicExecutionReport fpmlVersion="5-5">
+                    <fpml:header>
+                        <fpml:messageId messageIdScheme="FXLMREG">fd79a9cc-5c1f-44bf-aef8-ce2432c06e23-156970:201001806503496-1</fpml:messageId>
+                        <fpml:sentBy messageAddressScheme="FXLMREG">FXLMREG</fpml:sentBy>
+                        <fpml:creationTimestamp>2018-03-06T06:09:10.004Z</fpml:creationTimestamp>
+                        <citisdrre:FXSubInstrumentCode>FX_SPOT</citisdrre:FXSubInstrumentCode>
+                    </fpml:header>
+                    <fpml:isCorrection>false</fpml:isCorrection>
+                    <fpml:correlationId correlationIdScheme="FXLMREG">fd79a9cc-5c1f-44bf-aef8-ce2432c06e23-156970:201001806503496-1</fpml:correlationId>
+                    <fpml:sequenceNumber>1</fpml:sequenceNumber>
+                    <fpml:asOfDate>2018-03-06</fpml:asOfDate>
+                    <fpml:asOfTime>06:09:09</fpml:asOfTime>
+                    <fpml:portfolioReference>
+                        <fpml:portfolioName/>
+                    </fpml:portfolioReference>
+                    <fpml:originatingEvent>TRADE</fpml:originatingEvent>
+                    <fpml:trade id="InternalTradeID.1987750896.1"/>
+                    <fpml:tradingEvent>
+                        <fpml:eventIdentifier>
+                            <fpml:partyReference href="PartyA"/>
+                            <fpml:eventId>fd79a9cc-5c1f-44bf-aef8-ce2432c06e23-156970:201001806503496-1</fpml:eventId>
+                        </fpml:eventIdentifier>
+                        <fpml:eventType>TRADE</fpml:eventType>
+                    </fpml:tradingEvent>
+                    <fpml:quote>
+                        <fpml:value>1.23393314</fpml:value>
+                        <fpml:measureType>PriceNotation</fpml:measureType>
+                        <fpml:quoteUnits>Price</fpml:quoteUnits>
+                    </fpml:quote>
+                    <fpml:quote>
+                        <fpml:value>0.00000000</fpml:value>
+                        <fpml:quoteUnits>Rate</fpml:quoteUnits>
+                        <fpml:side>Mid</fpml:side>
+                    </fpml:quote>
+                </citiml:nonpublicExecutionReport>
+            </citiml:citimlEvent>
+        </citiml:citimlEvents>
+        <citiml:citimlPostEventTrades>
+            <citiml:citimlPostEventTrade>
+                <citiml:postEventTrade>
+                    <fpml:tradeHeader>
+                        <fpml:partyTradeIdentifier>
+                            <fpml:partyReference href="PartyA"/>
+                            <fpml:tradeId tradeIdScheme="USINamespace">CITI</fpml:tradeId>
+                            <fpml:tradeId tradeIdScheme="USI">156970:201001806503496</fpml:tradeId>
+                            <fpml:versionedTradeId>
+                                <fpml:tradeId tradeIdScheme="InternalTradeID">1987750896</fpml:tradeId>
+                                <fpml:version>1</fpml:version>
+                                <fpml:effectiveDate>2018-03-06</fpml:effectiveDate>
+                            </fpml:versionedTradeId>
+                            <fpml:versionedTradeId>
+                                <fpml:tradeId tradeIdScheme="ExternalRef">2257216871</fpml:tradeId>
+                                <fpml:version>1</fpml:version>
+                                <fpml:effectiveDate>2018-03-06</fpml:effectiveDate>
+                            </fpml:versionedTradeId>
+                            <fpml:versionedTradeId>
+                                <fpml:tradeId tradeIdScheme="GroupId">2257216871</fpml:tradeId>
+                                <fpml:version>1</fpml:version>
+                                <fpml:effectiveDate>2018-03-06</fpml:effectiveDate>
+                            </fpml:versionedTradeId>
+                            <fpml:versionedTradeId>
+                                <fpml:tradeId tradeIdScheme="ContractNo">1987750896</fpml:tradeId>
+                                <fpml:version>1</fpml:version>
+                                <fpml:effectiveDate>2018-03-06</fpml:effectiveDate>
+                            </fpml:versionedTradeId>
+                            <fpml:versionedTradeId>
+                                <fpml:tradeId tradeIdScheme="ClientReference">20100-1806503496</fpml:tradeId>
+                                <fpml:version>1</fpml:version>
+                                <fpml:effectiveDate>2018-03-06</fpml:effectiveDate>
+                            </fpml:versionedTradeId>
+                        </fpml:partyTradeIdentifier>
+                        <fpml:partyTradeIdentifier/>
+                        <fpml:partyTradeIdentifier/>
+                        <fpml:partyTradeIdentifier>
+                            <fpml:partyReference href="PartyA"/>
+                            <fpml:tradeId tradeIdScheme="http://www.dtcc.com/internal-reference-id">156970:201001806503496</fpml:tradeId>
+                        </fpml:partyTradeIdentifier>
+                        <fpml:partyTradeIdentifier/>
+                        <fpml:partyTradeInformation>
+                            <fpml:partyReference href="PartyA"/>
+                            <fpml:relatedParty>
+                                <fpml:partyReference href="PartyA"/>
+                                <fpml:role partyRoleScheme="http://www.fpml.org/coding-scheme/party-role">Counterparty</fpml:role>
+                            </fpml:relatedParty>
+                            <fpml:relatedParty>
+                                <fpml:partyReference href="PartyB"/>
+                                <fpml:role partyRoleScheme="http://www.fpml.org/coding-scheme/party-role">ReportingParty</fpml:role>
+                            </fpml:relatedParty>
+                            <fpml:relatedParty>
+                                <fpml:partyReference href="ExecutionFacility"/>
+                                <fpml:role partyRoleScheme="http://www.fpml.org/coding-scheme/party-role">ExecutionFacility</fpml:role>
+                            </fpml:relatedParty>
+                            <fpml:category categoryScheme="http://www.dtcc.com/compressed_trade">false</fpml:category>
+                            <fpml:category categoryScheme="http://www.fpml.org/coding-scheme/external/esma/mifir/trading-capacity">DEAL</fpml:category>
+                            <fpml:category categoryScheme="http://www.dtcc.com/coding-scheme/external/party-roles/emir-buyer-seller">B</fpml:category>
+                            <fpml:category categoryScheme="http://www.dtcc.com/coding-scheme/external/emir-delivery-type">PHYSICAL</fpml:category>
+                            <fpml:executionDateTime executionDateTimeScheme="FXLMREG">2018-03-06T06:09:09.170000Z</fpml:executionDateTime>
+                            <fpml:allocationStatus>UNALLOCATED</fpml:allocationStatus>
+                            <fpml:intentToClear>false</fpml:intentToClear>
+                            <fpml:clearingStatus>false</fpml:clearingStatus>
+                            <fpml:nonStandardTerms>false</fpml:nonStandardTerms>
+                            <fpml:executionType>Electronic</fpml:executionType>
+                            <fpml:executionVenueType executionVenueTypeScheme="http://www.dtcc.com/free-format-text">Off-Facility</fpml:executionVenueType>
+                            <fpml:verificationMethod>NonElectronic</fpml:verificationMethod>
+                            <fpml:confirmationMethod>NotConfirmed</fpml:confirmationMethod>
+                        </fpml:partyTradeInformation>
+                        <fpml:tradeDate>2018-03-06</fpml:tradeDate>
+                    </fpml:tradeHeader>
+                    <fpml:fxSingleLeg>
+                        <fpml:primaryAssetClass>ForeignExchange</fpml:primaryAssetClass>
+                        <fpml:secondaryAssetClass>ForeignExchange</fpml:secondaryAssetClass>
+                        <fpml:productId productIdScheme="http://www.fpml.org/coding-scheme/product-taxonomy">ForeignExchange:Spot</fpml:productId>
+                        <fpml:exchangedCurrency1>
+                            <fpml:payerPartyReference href="PartyA"/>
+                            <fpml:paymentAmount>
+                                <fpml:currency>USD</fpml:currency>
+                                <fpml:amount>21241.32</fpml:amount>
+                            </fpml:paymentAmount>
+                        </fpml:exchangedCurrency1>
+                        <fpml:exchangedCurrency2>
+                            <fpml:payerPartyReference href="PartyB"/>
+                            <fpml:paymentAmount>
+                                <fpml:currency>EUR</fpml:currency>
+                                <fpml:amount>17214.32</fpml:amount>
+                            </fpml:paymentAmount>
+                        </fpml:exchangedCurrency2>
+                        <fpml:dealtCurrency>ExchangedCurrency2</fpml:dealtCurrency>
+                        <fpml:valueDate>2018-03-06</fpml:valueDate>
+                        <fpml:exchangeRate>
+                            <fpml:quotedCurrencyPair>
+                                <fpml:currency1>USD</fpml:currency1>
+                                <fpml:currency2>EUR</fpml:currency2>
+                                <fpml:quoteBasis>Currency1PerCurrency2</fpml:quoteBasis>
+                            </fpml:quotedCurrencyPair>
+                            <fpml:rate>1.23393314</fpml:rate>
+                            <fpml:spotRate>1.23393314</fpml:spotRate>
+                            <fpml:forwardPoints>0.00000000</fpml:forwardPoints>
+                        </fpml:exchangeRate>
+                        <fpml:nonDeliverableSettlement>
+                            <fpml:settlementCurrency>USD</fpml:settlementCurrency>
+                            <fpml:fixing>
+                                <fpml:quotedCurrencyPair>
+                                    <fpml:currency1>USD</fpml:currency1>
+                                    <fpml:currency2>EUR</fpml:currency2>
+                                    <fpml:quoteBasis>Currency1PerCurrency2</fpml:quoteBasis>
+                                </fpml:quotedCurrencyPair>
+                            </fpml:fixing>
+                        </fpml:nonDeliverableSettlement>
+                    </fpml:fxSingleLeg>
+                </citiml:postEventTrade>
+                <ns10:citimlFxExtendedTradeDetails>
+                    <ns8:dealtCcyDealerCode>SYSTEM</ns8:dealtCcyDealerCode>
+                    <ns8:otherCcyDealerCode>SYSTEM</ns8:otherCcyDealerCode>
+                    <ns8:processingBranchCode>WLM</ns8:processingBranchCode>
+                    <ns8:productDeliveryType>FX_SPOT</ns8:productDeliveryType>
+                    <ns8:tradeType>EXTERNAL</ns8:tradeType>
+                    <ns8:dealingSource>WorldLink</ns8:dealingSource>
+                    <ns8:dealType>EXTERNAL</ns8:dealType>
+                    <ns8:comment/>
+                    <ns8:payInstructions/>
+                    <ns8:historyTrade>Y</ns8:historyTrade>
+                    <ns8:contractState>BOOKED</ns8:contractState>
+                    <ns8:coverRate>
+                        <fpml:rate>1.23455400</fpml:rate>
+                        <fpml:spotRate>1.23455400</fpml:spotRate>
+                        <fpml:forwardPoints>0.00000000</fpml:forwardPoints>
+                    </ns8:coverRate>
+                    <ns8:dealtUSDDealRate>
+                        <fpml:rate>1.23393314</fpml:rate>
+                        <fpml:forwardPoints>0.00000000</fpml:forwardPoints>
+                    </ns8:dealtUSDDealRate>
+                    <ns8:dealtUSDCoverRate>
+                        <fpml:rate>1.23455400</fpml:rate>
+                        <fpml:forwardPoints>0.00000000</fpml:forwardPoints>
+                    </ns8:dealtUSDCoverRate>
+                    <ns8:otherUSDDealRate>
+                        <fpml:rate>1.00000000</fpml:rate>
+                        <fpml:forwardPoints>0.00000000</fpml:forwardPoints>
+                    </ns8:otherUSDDealRate>
+                    <ns8:otherUSDCoverRate>
+                        <fpml:rate>1.00000000</fpml:rate>
+                        <fpml:forwardPoints>0.00000000</fpml:forwardPoints>
+                    </ns8:otherUSDCoverRate>
+                    <ns8:riskUnit>
+                        <ns8:portfolioRiskUnit>
+                            <ns8:product>Spot</ns8:product>
+                            <ns8:relation>Deal</ns8:relation>
+                            <ns8:portfolioCode>FOREX</ns8:portfolioCode>
+                            <ns8:accountMnemonic>FOREX</ns8:accountMnemonic>
+                        </ns8:portfolioRiskUnit>
+                        <ns8:portfolioRiskUnit>
+                            <ns8:product>Forward</ns8:product>
+                            <ns8:relation>Deal</ns8:relation>
+                            <ns8:portfolioCode>FOREX</ns8:portfolioCode>
+                            <ns8:accountMnemonic>FOREX</ns8:accountMnemonic>
+                        </ns8:portfolioRiskUnit>
+                        <ns8:portfolioRiskUnit>
+                            <ns8:product>Spot</ns8:product>
+                            <ns8:relation>Other</ns8:relation>
+                            <ns8:portfolioCode>FOREX</ns8:portfolioCode>
+                            <ns8:accountMnemonic>FOREX</ns8:accountMnemonic>
+                        </ns8:portfolioRiskUnit>
+                        <ns8:portfolioRiskUnit>
+                            <ns8:product>Forward</ns8:product>
+                            <ns8:relation>Other</ns8:relation>
+                            <ns8:portfolioCode>FOREX</ns8:portfolioCode>
+                            <ns8:accountMnemonic>FOREX</ns8:accountMnemonic>
+                        </ns8:portfolioRiskUnit>
+                        <ns8:dealSpotRiskUnit>FOREX</ns8:dealSpotRiskUnit>
+                        <ns8:dealForwardRiskUnit>FOREX</ns8:dealForwardRiskUnit>
+                        <ns8:otherSpotRiskUnit>FOREX</ns8:otherSpotRiskUnit>
+                        <ns8:otherForwardRiskUnit>FOREX</ns8:otherForwardRiskUnit>
+                    </ns8:riskUnit>
+                    <ns8:spotScheduleAmount/>
+                    <ns8:spotScheduleAmountOveride/>
+                    <ns8:fwdScheduleAmount/>
+                    <ns8:fwdScheduleAmountOveride/>
+                    <ns8:USDEquivalent>21241.32</ns8:USDEquivalent>
+                    <ns8:BuySellInd>BUY</ns8:BuySellInd>
+                    <ns8:IsFINAmend>Y</ns8:IsFINAmend>
+                    <ns8:BrokerCode>PHO</ns8:BrokerCode>
+                    <ns8:EDealerBranchCode>20100</ns8:EDealerBranchCode>
+                    <ns8:salesDeal>true</ns8:salesDeal>
+                    <ns8:FXSubInstrumentCode>FX_SPOT</ns8:FXSubInstrumentCode>
+                </ns10:citimlFxExtendedTradeDetails>
+                <citiml:citimlTradeExtensionData>
+                    <citiml:citimlTradeProcessing>
+                        <citiml:citimlTradeState>ACTIVE</citiml:citimlTradeState>
+                        <citiml:citimlTerminationDate>2018-03-06</citiml:citimlTerminationDate>
+                        <citiml:citimlLifeCycleAction>
+                            <citiml:citimlAction>New</citiml:citimlAction>
+                        </citiml:citimlLifeCycleAction>
+                        <citiml:citimlSettlementType>Physical</citiml:citimlSettlementType>
+                        <citiml:citimlIsAdjustment>false</citiml:citimlIsAdjustment>
+                        <citiml:citimlIsUnsettled>false</citiml:citimlIsUnsettled>
+                        <citiml:citimlContractualFixedTradeSize>
+                            <fpml:partyReference href="PartyA"/>
+                            <citiml:citimlFixedNotionalAmount>
+                                <fpml:currency>USD</fpml:currency>
+                                <fpml:amount>21241.32</fpml:amount>
+                            </citiml:citimlFixedNotionalAmount>
+                            <citiml:citimlFixedNotionalAmountUSD>
+                                <fpml:currency>USD</fpml:currency>
+                                <fpml:amount>21241.32</fpml:amount>
+                            </citiml:citimlFixedNotionalAmountUSD>
+                        </citiml:citimlContractualFixedTradeSize>
+                        <citiml:citimlContractualFixedTradeSize>
+                            <fpml:partyReference href="PartyB"/>
+                            <citiml:citimlFixedNotionalAmount>
+                                <fpml:currency>EUR</fpml:currency>
+                                <fpml:amount>17214.32</fpml:amount>
+                            </citiml:citimlFixedNotionalAmount>
+                        </citiml:citimlContractualFixedTradeSize>
+                        <citiml:citimlContractualFixedTradePrice>
+                            <citiml:priceRate>1.23393314</citiml:priceRate>
+                            <citiml:priceType>ForwardRate</citiml:priceType>
+                        </citiml:citimlContractualFixedTradePrice>
+                        <citiml:citimlAlgorithm>
+                            <citiml:name>NORE</citiml:name>
+                            <citiml:role>Execution</citiml:role>
+                        </citiml:citimlAlgorithm>
+                        <citiml:citimlCFIClassification>
+                            <citiml:citimlCFIClassifier classifierType="http://www.fpml.org/coding-scheme/external/iso10962/InstrumentType">Forward</citiml:citimlCFIClassifier>
+                        </citiml:citimlCFIClassification>
+                    </citiml:citimlTradeProcessing>
+                    <citiml:citimlAuditInfo>
+                        <citiml:citimlLastModifiedBy>SYSTEM</citiml:citimlLastModifiedBy>
+                        <citiml:citimlLastModificationTimeStamp>2018-03-06T06:09:10Z</citiml:citimlLastModificationTimeStamp>
+                        <citiml:citimlLastCheckedBy>SYSTEM</citiml:citimlLastCheckedBy>
+                    </citiml:citimlAuditInfo>
+                </citiml:citimlTradeExtensionData>
+            </citiml:citimlPostEventTrade>
+        </citiml:citimlPostEventTrades>
+        <citiml:citimlParties>
