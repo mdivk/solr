@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<citiml:citimlTradeNotification
-    xmlns:citiml="http://tradecapturesys.cmb.citigroup.net/citiml-2-0"
-    xmlns:citimlcommon="http://tradecapturesys.cmb.citigroup.net/citiml-common-2-0"
+<imexml:imexmlTradeNotification
+    xmlns:imexml="http://tradecapturesys.cmb.citigroup.net/imexml-2-0"
+    xmlns:imexmlcommon="http://tradecapturesys.cmb.citigroup.net/imexml-common-2-0"
     xmlns:citisdrre="http://www.citi.com/citisdrre-fpml/recordkeeping"
     xmlns:dtcc="http://www.dtcc.com/ext"
     xmlns:fpml="http://www.fpml.org/FpML-5/recordkeeping"
-    xmlns:ns10="http://tradecapturesys.cmb.citigroup.net/citiml-payload-2-0"
-    xmlns:ns11="http://tradecapturesys.cmb.citigroup.net/citiml-eqd-extended-2-0"
-    xmlns:ns12="http://tradecapturesys.cmb.citigroup.net/citiml-cds-extended-2-0"
-    xmlns:ns13="http://tradecapturesys.cmb.citigroup.net/citiml-bond-option-extended-2-0"
-    xmlns:ns14="http://tradecapturesys.cmb.citigroup.net/citiml-com-extended-2-0"
-    xmlns:ns15="http://tradecapturesys.cmb.citigroup.net/citiml-eq-shared-extended-2-0"
-    xmlns:ns16="http://tradecapturesys.cmb.citigroup.net/citiml-return-swaps-extended-2-0"
+    xmlns:ns10="http://tradecapturesys.cmb.citigroup.net/imexml-payload-2-0"
+    xmlns:ns11="http://tradecapturesys.cmb.citigroup.net/imexml-eqd-extended-2-0"
+    xmlns:ns12="http://tradecapturesys.cmb.citigroup.net/imexml-cds-extended-2-0"
+    xmlns:ns13="http://tradecapturesys.cmb.citigroup.net/imexml-bond-option-extended-2-0"
+    xmlns:ns14="http://tradecapturesys.cmb.citigroup.net/imexml-com-extended-2-0"
+    xmlns:ns15="http://tradecapturesys.cmb.citigroup.net/imexml-eq-shared-extended-2-0"
+    xmlns:ns16="http://tradecapturesys.cmb.citigroup.net/imexml-return-swaps-extended-2-0"
     xmlns:ns17="http://util.fxpg.tcmt.citi.com"
     xmlns:ns6="http://www.w3.org/2000/09/xmldsig#"
-    xmlns:ns7="http://tradecapturesys.cmb.citigroup.net/citiml-irex-extended-2-0"
-    xmlns:ns8="http://tradecapturesys.cmb.citigroup.net/citiml-fx-extended-2-0" xmlns:ns9="http://tradecapturesys.cmb.citigroup.net/citiml-ird-extended-2-0">
-    <citiml:citimlTradeNotificationMessageHeader>
-        <citiml:citimlMessageId messageIdScheme="FXLMREG">fd79a9cc-5c1f-44bf-aef8-ce2432c06e23-156970:201001806503496-1</citiml:citimlMessageId>
-        <citiml:citimlSentBy messageAddressScheme="FXLMREG">FXLMREG</citiml:citimlSentBy>
-        <citiml:citimlCreationTimestamp>2018-03-06T06:09:10.004Z</citiml:citimlCreationTimestamp>
-        <citiml:citimlOriginatingSystemName>EDN</citiml:citimlOriginatingSystemName>
-        <citiml:isSDRReportable>false</citiml:isSDRReportable>
-    </citiml:citimlTradeNotificationMessageHeader>
-    <citiml:citimlNotificationBundleDetails>
-        <citiml:citimlEvents>
-            <citiml:citimlEvent>
-                <citiml:nonpublicExecutionReport fpmlVersion="5-5">
+    xmlns:ns7="http://tradecapturesys.cmb.citigroup.net/imexml-irex-extended-2-0"
+    xmlns:ns8="http://tradecapturesys.cmb.citigroup.net/imexml-fx-extended-2-0" xmlns:ns9="http://tradecapturesys.cmb.citigroup.net/imexml-ird-extended-2-0">
+    <imexml:imexmlTradeNotificationMessageHeader>
+        <imexml:imexmlMessageId messageIdScheme="FXLMREG">fd79a9cc-5c1f-44bf-aef8-ce2432c06e23-156970:201001806503496-1</imexml:imexmlMessageId>
+        <imexml:imexmlSentBy messageAddressScheme="FXLMREG">FXLMREG</imexml:imexmlSentBy>
+        <imexml:imexmlCreationTimestamp>2018-03-06T06:09:10.004Z</imexml:imexmlCreationTimestamp>
+        <imexml:imexmlOriginatingSystemName>EDN</imexml:imexmlOriginatingSystemName>
+        <imexml:isSDRReportable>false</imexml:isSDRReportable>
+    </imexml:imexmlTradeNotificationMessageHeader>
+    <imexml:imexmlNotificationBundleDetails>
+        <imexml:imexmlEvents>
+            <imexml:imexmlEvent>
+                <imexml:nonpublicExecutionReport fpmlVersion="5-5">
                     <fpml:header>
                         <fpml:messageId messageIdScheme="FXLMREG">fd79a9cc-5c1f-44bf-aef8-ce2432c06e23-156970:201001806503496-1</fpml:messageId>
                         <fpml:sentBy messageAddressScheme="FXLMREG">FXLMREG</fpml:sentBy>
@@ -60,12 +60,12 @@
                         <fpml:quoteUnits>Rate</fpml:quoteUnits>
                         <fpml:side>Mid</fpml:side>
                     </fpml:quote>
-                </citiml:nonpublicExecutionReport>
-            </citiml:citimlEvent>
-        </citiml:citimlEvents>
-        <citiml:citimlPostEventTrades>
-            <citiml:citimlPostEventTrade>
-                <citiml:postEventTrade>
+                </imexml:nonpublicExecutionReport>
+            </imexml:imexmlEvent>
+        </imexml:imexmlEvents>
+        <imexml:imexmlPostEventTrades>
+            <imexml:imexmlPostEventTrade>
+                <imexml:postEventTrade>
                     <fpml:tradeHeader>
                         <fpml:partyTradeIdentifier>
                             <fpml:partyReference href="PartyA"/>
@@ -175,8 +175,8 @@
                             </fpml:fixing>
                         </fpml:nonDeliverableSettlement>
                     </fpml:fxSingleLeg>
-                </citiml:postEventTrade>
-                <ns10:citimlFxExtendedTradeDetails>
+                </imexml:postEventTrade>
+                <ns10:imexmlFxExtendedTradeDetails>
                     <ns8:dealtCcyDealerCode>SYSTEM</ns8:dealtCcyDealerCode>
                     <ns8:otherCcyDealerCode>SYSTEM</ns8:otherCcyDealerCode>
                     <ns8:processingBranchCode>WLM</ns8:processingBranchCode>
@@ -250,53 +250,53 @@
                     <ns8:EDealerBranchCode>20100</ns8:EDealerBranchCode>
                     <ns8:salesDeal>true</ns8:salesDeal>
                     <ns8:FXSubInstrumentCode>FX_SPOT</ns8:FXSubInstrumentCode>
-                </ns10:citimlFxExtendedTradeDetails>
-                <citiml:citimlTradeExtensionData>
-                    <citiml:citimlTradeProcessing>
-                        <citiml:citimlTradeState>ACTIVE</citiml:citimlTradeState>
-                        <citiml:citimlTerminationDate>2018-03-06</citiml:citimlTerminationDate>
-                        <citiml:citimlLifeCycleAction>
-                            <citiml:citimlAction>New</citiml:citimlAction>
-                        </citiml:citimlLifeCycleAction>
-                        <citiml:citimlSettlementType>Physical</citiml:citimlSettlementType>
-                        <citiml:citimlIsAdjustment>false</citiml:citimlIsAdjustment>
-                        <citiml:citimlIsUnsettled>false</citiml:citimlIsUnsettled>
-                        <citiml:citimlContractualFixedTradeSize>
+                </ns10:imexmlFxExtendedTradeDetails>
+                <imexml:imexmlTradeExtensionData>
+                    <imexml:imexmlTradeProcessing>
+                        <imexml:imexmlTradeState>ACTIVE</imexml:imexmlTradeState>
+                        <imexml:imexmlTerminationDate>2018-03-06</imexml:imexmlTerminationDate>
+                        <imexml:imexmlLifeCycleAction>
+                            <imexml:imexmlAction>New</imexml:imexmlAction>
+                        </imexml:imexmlLifeCycleAction>
+                        <imexml:imexmlSettlementType>Physical</imexml:imexmlSettlementType>
+                        <imexml:imexmlIsAdjustment>false</imexml:imexmlIsAdjustment>
+                        <imexml:imexmlIsUnsettled>false</imexml:imexmlIsUnsettled>
+                        <imexml:imexmlContractualFixedTradeSize>
                             <fpml:partyReference href="PartyA"/>
-                            <citiml:citimlFixedNotionalAmount>
+                            <imexml:imexmlFixedNotionalAmount>
                                 <fpml:currency>USD</fpml:currency>
                                 <fpml:amount>21241.32</fpml:amount>
-                            </citiml:citimlFixedNotionalAmount>
-                            <citiml:citimlFixedNotionalAmountUSD>
+                            </imexml:imexmlFixedNotionalAmount>
+                            <imexml:imexmlFixedNotionalAmountUSD>
                                 <fpml:currency>USD</fpml:currency>
                                 <fpml:amount>21241.32</fpml:amount>
-                            </citiml:citimlFixedNotionalAmountUSD>
-                        </citiml:citimlContractualFixedTradeSize>
-                        <citiml:citimlContractualFixedTradeSize>
+                            </imexml:imexmlFixedNotionalAmountUSD>
+                        </imexml:imexmlContractualFixedTradeSize>
+                        <imexml:imexmlContractualFixedTradeSize>
                             <fpml:partyReference href="PartyB"/>
-                            <citiml:citimlFixedNotionalAmount>
+                            <imexml:imexmlFixedNotionalAmount>
                                 <fpml:currency>EUR</fpml:currency>
                                 <fpml:amount>17214.32</fpml:amount>
-                            </citiml:citimlFixedNotionalAmount>
-                        </citiml:citimlContractualFixedTradeSize>
-                        <citiml:citimlContractualFixedTradePrice>
-                            <citiml:priceRate>1.23393314</citiml:priceRate>
-                            <citiml:priceType>ForwardRate</citiml:priceType>
-                        </citiml:citimlContractualFixedTradePrice>
-                        <citiml:citimlAlgorithm>
-                            <citiml:name>NORE</citiml:name>
-                            <citiml:role>Execution</citiml:role>
-                        </citiml:citimlAlgorithm>
-                        <citiml:citimlCFIClassification>
-                            <citiml:citimlCFIClassifier classifierType="http://www.fpml.org/coding-scheme/external/iso10962/InstrumentType">Forward</citiml:citimlCFIClassifier>
-                        </citiml:citimlCFIClassification>
-                    </citiml:citimlTradeProcessing>
-                    <citiml:citimlAuditInfo>
-                        <citiml:citimlLastModifiedBy>SYSTEM</citiml:citimlLastModifiedBy>
-                        <citiml:citimlLastModificationTimeStamp>2018-03-06T06:09:10Z</citiml:citimlLastModificationTimeStamp>
-                        <citiml:citimlLastCheckedBy>SYSTEM</citiml:citimlLastCheckedBy>
-                    </citiml:citimlAuditInfo>
-                </citiml:citimlTradeExtensionData>
-            </citiml:citimlPostEventTrade>
-        </citiml:citimlPostEventTrades>
-        <citiml:citimlParties>
+                            </imexml:imexmlFixedNotionalAmount>
+                        </imexml:imexmlContractualFixedTradeSize>
+                        <imexml:imexmlContractualFixedTradePrice>
+                            <imexml:priceRate>1.23393314</imexml:priceRate>
+                            <imexml:priceType>ForwardRate</imexml:priceType>
+                        </imexml:imexmlContractualFixedTradePrice>
+                        <imexml:imexmlAlgorithm>
+                            <imexml:name>NORE</imexml:name>
+                            <imexml:role>Execution</imexml:role>
+                        </imexml:imexmlAlgorithm>
+                        <imexml:imexmlCFIClassification>
+                            <imexml:imexmlCFIClassifier classifierType="http://www.fpml.org/coding-scheme/external/iso10962/InstrumentType">Forward</imexml:imexmlCFIClassifier>
+                        </imexml:imexmlCFIClassification>
+                    </imexml:imexmlTradeProcessing>
+                    <imexml:imexmlAuditInfo>
+                        <imexml:imexmlLastModifiedBy>SYSTEM</imexml:imexmlLastModifiedBy>
+                        <imexml:imexmlLastModificationTimeStamp>2018-03-06T06:09:10Z</imexml:imexmlLastModificationTimeStamp>
+                        <imexml:imexmlLastCheckedBy>SYSTEM</imexml:imexmlLastCheckedBy>
+                    </imexml:imexmlAuditInfo>
+                </imexml:imexmlTradeExtensionData>
+            </imexml:imexmlPostEventTrade>
+        </imexml:imexmlPostEventTrades>
+        <imexml:imexmlParties>
