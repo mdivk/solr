@@ -1,0 +1,14 @@
+1. two formats data to be created index
+2. a simple dashboard built within Solr Admin
+
+Two modes:
+-Standalone: single computer, core, can be multiple cores on one computer
+-solrCloud - distributed acrosss computers or instances on one computer
+ collections
+
+server/solr/solr.xml: server instance configurations (53 line xml file);
+server/solr/films/core.properties: core configurations such as names, locations and files in the core (4 line text file);
+server/solr/films/conf/solrconfig.xml: core configurations for field guessing, direcotries, query settings, spell checking, keyword highlighting and query response formats (1387 line xml file);
+server/solr/films/conf/managed-schema: core configurations for field processing managed with two Solr tools (943 link xml file)
+server/solr/films/conf/schema.xml: core configurations for field processing managed by hand.
+
