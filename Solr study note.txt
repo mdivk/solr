@@ -12,3 +12,5 @@ server/solr/films/conf/solrconfig.xml: core configurations for field guessing, d
 server/solr/films/conf/managed-schema: core configurations for field processing managed with two Solr tools (943 link xml file)
 server/solr/films/conf/schema.xml: core configurations for field processing managed by hand.
 
+Parser:
+ python3 script.py -p apac/apeq/odac/2018/03/20180328/data -o apac/apeq/odac/2018/03/20180328/json
