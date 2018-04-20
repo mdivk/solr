@@ -147,5 +147,5 @@ def write_key_value(data):
 
 #read_file('{p}'.format(p=options.bz2_archive)): the folder of bz2 archives: -p C:\Users\RX52019\PycharmProjects\FIX_Indexer\test_data
 write_key_value(read_file('{p}'.format(p=options.bz2_archive)))
-#write_key_value("C:\\Users\\RX52019\\PycharmProjects\\FIX_Indexer\\test_data")
+
 #write_key_value(read_file("C:\indexer_test"))
