@@ -58,7 +58,8 @@ def read_file(directory):
         yield directory
 
     i=0
-    open_func = bz2.open
+    #open_func = bz2.open
+    open_func = bz2.BZ2File
     file_data = []
     for each_file in files:
         suf = ''.join(Path(each_file).suffixes)
@@ -75,7 +76,8 @@ def read_file(directory):
 
         if not flag_file_exist:
             try:
-                file_data = open_func('{}/{}'.format(directory, each_file), 'rt', encoding='utf-8', errors='ignore')
+                #file_data = open_func('{}/{}'.format(directory, each_file), 'rt', encoding='utf-8', errors='ignore')
+                file_data = open_func(os.path.join(directory, each_file), 'rt', encoding='utf-8', errors='ignore')
             except FileNotFoundError:
                 file_data = []
                 print('File Not Found')
@@ -109,8 +111,13 @@ def write_key_value(data):
                                                         items.split('=')[1]),
                                          filter(None, fix_split)))
                     new_dict_data = dict()
+
                     new_dict_data['region'] = region
                     new_dict_data['flow'] = flow
+                    new_dict_data['path'] = options.bz2_archive
+                    new_dict_data['order_id'] = dict_data.get('OrderID')
+                    new_dict_data['trade_date'] = dict_data.get('TradeDate')
+                    new_dict_data['id'] = dict_data.get('OrderID') + "_" + dict_data.get('TradeDate')
                     # new_dict_data['order_id'] = dict_data.get('OrderID', '')
                     # new_dict_data['order_version'] = dict_data.get('10240', '')
                     # new_dict_data['trd_date'] = dict_data.get('TradeDate', '')
