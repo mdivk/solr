@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<B3Msg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.example.org/B3">
+  <InitSystem>SIMPLICITILMMTM</InitSystem>
+  <InitSystemRefId>1653153</InitSystemRefId>
+  <ValueDate>2017-10-12</ValueDate>
+  <FirmAccount>SXMLLC</FirmAccount>
+  <OASYSDealId>8366549</OASYSDealId>
+  <OASYSTransactionId>2</OASYSTransactionId>
+  <TradeCaptureSystem>MUREXNY</TradeCaptureSystem>
+  <PricingSystem>SMPEM</PricingSystem>
+  <SysTradeid>1700758</SysTradeid>
+  <UniqueSysTradeid>148932:1212131</UniqueSysTradeid>
+  <TenYearBondEquiv_USD>0.259619579905198</TenYearBondEquiv_USD>
+  <DeltaAdjNotional_USD>0</DeltaAdjNotional_USD>
+  <Corpus>
+    <LEG_NUM>0</LEG_NUM>
+    <MTM_USD>18587.31</MTM_USD>
+    <MTM_LOCAL>18587.31</MTM_LOCAL>
+    <MTM_LOCAL_CURRENCY>USD</MTM_LOCAL_CURRENCY>
+  </Corpus>
+  <ValueTime>2017-10-12T00:00:00</ValueTime>
+  <TradeURL>http://ark.imex.net/ARK/TRADES/G10/1273686_MUREXNY</TradeURL>
+  <EnvUrl>http://ark-mktdata.wlb3.imex.net/ARK/ENVS_SNAPSHOT/XING?SnapshotDate=20171012&amp;EnvName=NY_DEFAULTQ2</EnvUrl>
+  <EnvOverlayUrl>http://ark-mktdata.wlb3.imex.net/ARK/ENVS_SNAPSHOT/XING?SnapshotDate=20171012&amp;EnvName=USD.FEDFUND</EnvOverlayUrl>
+</B3Msg>^B
+<?xml version="1.0" encoding="utf-8"?>
+<B3Msg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.example.org/B3">
+  <InitSystem>WELYNX</InitSystem>
+  <InitSystemRefId>1653153</InitSystemRefId>
+  <ValueDate>2017-10-12</ValueDate>
+  <FirmAccount>SXMLLC</FirmAccount>
+  <OASYSDealId>8369093</OASYSDealId>
+  <OASYSTransactionId>801</OASYSTransactionId>
+  <TradeCaptureSystem>MUREXNY</TradeCaptureSystem>
+  <PricingSystem>SMPEM</PricingSystem>
+  <SysTradeid>1731546</SysTradeid>
+  <UniqueSysTradeid>148932:1234568</UniqueSysTradeid>
+  <TenYearBondEquiv_USD>1.55130395684363</TenYearBondEquiv_USD>
+  <DeltaAdjNotional_USD>0</DeltaAdjNotional_USD>
+  <Corpus>
+    <LEG_NUM>0</LEG_NUM>
+    <MTM_USD>-49990.33</MTM_USD>
+    <MTM_LOCAL>-49990.33</MTM_LOCAL>
+    <MTM_LOCAL_CURRENCY>USD</MTM_LOCAL_CURRENCY>
+  </Corpus>
+  <ValueTime>2017-10-12T00:00:00</ValueTime>
+  <TradeURL>http://ark.imex.net/ARK/TRADES/G10/2112026_MUREXNY</TradeURL>
+  <EnvUrl>http://ark-mktdata.wlb3.imex.net/ARK/ENVS_SNAPSHOT/XING?SnapshotDate=20171012&amp;EnvName=NY_DEFAULTQ2</EnvUrl>
+  <EnvOverlayUrl>http://ark-mktdata.wlb3.imex.net/ARK/ENVS_SNAPSHOT/XING?SnapshotDate=20171012&amp;EnvName=USD.FEDFUND</EnvOverlayUrl>
+</B3Msg>^B
+<?xml version="1.0" encoding="utf-8"?>
+<B3Msg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.example.org/B3">
+  <InitSystem>WELYNX</InitSystem>
+  <InitSystemRefId>1653153</InitSystemRefId>
+  <ValueDate>2017-10-12</ValueDate>
+  <FirmAccount>SHNIDLCL</FirmAccount>
+  <OASYSDealId>8369093</OASYSDealId>
+  <OASYSTransactionId>803</OASYSTransactionId>
+  <TradeCaptureSystem>MUREXNY</TradeCaptureSystem>
+  <PricingSystem>SMPEM</PricingSystem>
+  <SysTradeid>1757450</SysTradeid>
+  <UniqueSysTradeid>148932:1253272</UniqueSysTradeid>
+  <TenYearBondEquiv_USD>-3.11955943349668</TenYearBondEquiv_USD>
+  <DeltaAdjNotional_USD>0</DeltaAdjNotional_USD>
+  <Corpus>
+    <LEG_NUM>0</LEG_NUM>
+    <MTM_USD>24412.79</MTM_USD>
+    <MTM_LOCAL>24412.79</MTM_LOCAL>
+    <MTM_LOCAL_CURRENCY>USD</MTM_LOCAL_CURRENCY>
+  </Corpus>
+  <ValueTime>2017-10-12T00:00:00</ValueTime>
+  <TradeURL>http://ark.imex.net/ARK/TRADES/G10/2112023_MUREXNY</TradeURL>
+ <EnvUrl>http://ark-mktdata.wlb3.imex.net/ARK/ENVS_SNAPSHOT/XING?SnapshotDate=20171012&amp;EnvName=NY_DEFAULTQ2</EnvUrl>
+  <EnvOverlayUrl>http://ark-mktdata.wlb3.imex.net/ARK/ENVS_SNAPSHOT/XING?SnapshotDate=20171012&amp;EnvName=USD.FEDFUND</EnvOverlayUrl>
+</B3Msg>^B
+<?xml version="1.0" encoding="utf-8"?>
+<B3Msg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.example.org/B3">
+  <InitSystem>WELYNX</InitSystem>
+  <InitSystemRefId>1653153</InitSystemRefId>
+  <ValueDate>2017-10-12</ValueDate>
+  <FirmAccount>SXMLLC</FirmAccount>
+  <OASYSDealId>8375437</OASYSDealId>
+  <OASYSTransactionId>807</OASYSTransactionId>
+  <TradeCaptureSystem>MUREXNY</TradeCaptureSystem>
+  <PricingSystem>SMPEM</PricingSystem>
+  <SysTradeid>1788982</SysTradeid>
+  <UniqueSysTradeid>148932:1275499</UniqueSysTradeid>
+  <TenYearBondEquiv_USD>0.338851490221852</TenYearBondEquiv_USD>
+  <DeltaAdjNotional_USD>0</DeltaAdjNotional_USD>
+  <Corpus>
+    <LEG_NUM>0</LEG_NUM>
+    <MTM_USD>10322.73</MTM_USD>
+    <MTM_LOCAL>10322.73</MTM_LOCAL>
+    <MTM_LOCAL_CURRENCY>USD</MTM_LOCAL_CURRENCY>
+  </Corpus>
+  <ValueTime>2017-10-12T00:00:00</ValueTime>
+  <TradeURL>http://ark.imex.net/ARK/TRADES/G10/1999393_MUREXNY</TradeURL>
+  <EnvUrl>http://ark-mktdata.wlb3.imex.net/ARK/ENVS_SNAPSHOT/XING?SnapshotDate=20171012&amp;EnvName=NY_DEFAULTQ2</EnvUrl>
+  <EnvOverlayUrl>http://ark-mktdata.wlb3.imex.net/ARK/ENVS_SNAPSHOT/XING?SnapshotDate=20171012&amp;EnvName=USD.FEDFUND</EnvOverlayUrl>
+</B3Msg>^B
+<?xml version="1.0" encoding="utf-8"?>
+<B3Msg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.example.org/B3">
+  <InitSystem>WELYNX</InitSystem>
+  <InitSystemRefId>1653153</InitSystemRefId>
+  <ValueDate>2017-10-12</ValueDate>
+  <FirmAccount>SXMLLC</FirmAccount>
+  <OASYSDealId>8375442</OASYSDealId>
+  <OASYSTransactionId>802</OASYSTransactionId>
+  <TradeCaptureSystem>MUREXNY</TradeCaptureSystem>
+  <PricingSystem>SMPEM</PricingSystem>
+  <SysTradeid>1788990</SysTradeid>
+  <UniqueSysTradeid>148932:1275504</UniqueSysTradeid>
+  <TenYearBondEquiv_USD>-0.337294269091659</TenYearBondEquiv_USD>
+  <DeltaAdjNotional_USD>0</DeltaAdjNotional_USD>
+  <Corpus>
+    <LEG_NUM>0</LEG_NUM>
+    <MTM_USD>-10341.37</MTM_USD>
+    <MTM_LOCAL>-10341.37</MTM_LOCAL>
+    <MTM_LOCAL_CURRENCY>USD</MTM_LOCAL_CURRENCY>
+  </Corpus>
+  <ValueTime>2017-10-12T00:00:00</ValueTime>
+  <TradeURL>http://ark.imex.net/ARK/TRADES/G10/2014541_MUREXNY</TradeURL>
+  <EnvUrl>http://ark-mktdata.wlb3.imex.net/ARK/ENVS_SNAPSHOT/XING?SnapshotDate=20171012&amp;EnvName=NY_DEFAULTQ2</EnvUrl>
+  <EnvOverlayUrl>http://ark-mktdata.wlb3.imex.net/ARK/ENVS_SNAPSHOT/XING?SnapshotDate=20171012&amp;EnvName=USD.FEDFUND</EnvOverlayUrl>
+</B3Msg>^B
+<?xml version="1.0" encoding="utf-8"?>
+<B3Msg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.example.org/B3">
+  <InitSystem>WELYNX</InitSystem>
+  <InitSystemRefId>1653153</InitSystemRefId>
+  <ValueDate>2017-10-12</ValueDate>
+  <FirmAccount>SXMLLC</FirmAccount>
+  <OASYSDealId>8375455</OASYSDealId>
+  <OASYSTransactionId>802</OASYSTransactionId>
+  <TradeCaptureSystem>MUREXNY</TradeCaptureSystem>
+  <PricingSystem>SMPEM</PricingSystem>
+  <SysTradeid>1789084</SysTradeid>
+  <UniqueSysTradeid>148932:1275572</UniqueSysTradeid>
+  <TenYearBondEquiv_USD>-0.0100317993993865</TenYearBondEquiv_USD>
+  <DeltaAdjNotional_USD>0</DeltaAdjNotional_USD>
+  <Corpus>
+    <LEG_NUM>0</LEG_NUM>
+    <MTM_USD>-773.6</MTM_USD>
+    <MTM_LOCAL>-773.6</MTM_LOCAL>
+    <MTM_LOCAL_CURRENCY>USD</MTM_LOCAL_CURRENCY>
+  </Corpus>
+  <ValueTime>2017-10-12T00:00:00</ValueTime>
+  <TradeURL>http://ark.imex.net/ARK/TRADES/G10/1406770_MUREXNY</TradeURL>
+  <EnvUrl>http://ark-mktdata.wlb3.imex.net/ARK/ENVS_SNAPSHOT/XING?SnapshotDate=20171012&amp;EnvName=NY_DEFAULTQ2</EnvUrl>
+  <EnvOverlayUrl>http://ark-mktdata.wlb3.imex.net/ARK/ENVS_SNAPSHOT/XING?SnapshotDate=20171012&amp;EnvName=USD.FEDFUND</EnvOverlayUrl>
+</B3Msg>^B
