@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<citiml:citimlTradeNotification
-    xmlns:citiml="http://tradecapturesys.cmb.citigroup.net/citiml-2-0"
-    xmlns:citimlcommon="http://tradecapturesys.cmb.citigroup.net/citiml-common-2-0"
-    xmlns:citisdrre="http://www.citi.com/citisdrre-fpml/recordkeeping"
+<citiml:imexmlTradeNotification
+    xmlns:imexml="http://tradecapturesys.cmb.citigroup.net/imexml-2-0"
+    xmlns:imexmlcommon="http://tradecapturesys.cmb.citigroup.net/imexml-common-2-0"
+    xmlns:imexsdrre="http://www.imex.com/imexsdrre-fpml/recordkeeping"
     xmlns:dtcc="http://www.dtcc.com/ext"
     xmlns:fpml="http://www.fpml.org/FpML-5/recordkeeping"
     xmlns:ns10="http://tradecapturesys.cmb.imexgroup.net/imexml-payload-2-0"
