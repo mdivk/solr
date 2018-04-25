@@ -80,7 +80,7 @@ class XMLToJson():
         
         content = re.sub(_illegal_xml_chars_RE, "", content)
         content = re.sub(r"[\x0A-\x0C]", "\n", content)
-        return content
+        return content 
 
 
     def parseXML(self, xml_data):
