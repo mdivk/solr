@@ -80,7 +80,7 @@ class XMLToJson():
         
         content = re.sub(_illegal_xml_chars_RE, "", content)
         content = re.sub(r"[\x0A-\x0C]", "\n", content)
-        return content 
+        return content
 
 
     def parseXML(self, xml_data):
@@ -105,16 +105,17 @@ class XMLToJson():
 
             tradeHeader = postEventTrade.find('fpml:tradeHeader', root.nsmap)
             tradeDate = tradeHeader.find('fpml:tradeDate', root.nsmap)
-            if tradeDate is not None:
+            if tradeDate is not None and data['TRD_DATE'] == '':
                 data['TRD_DATE'] = tradeDate.text
 
             for partyTradeIdentifier in tradeHeader:
-                tradeId = partyTradeIdentifier.find('fpml:tradeId', root.nsmap)
+                tradeIds = partyTradeIdentifier.findall('.//fpml:tradeId', root.nsmap)
 
-                if tradeId is not None and tradeId.attrib['tradeIdScheme'] == 'http://www.dtcc.com/internal-reference-id':
-                    data['UITID'] = tradeId.text
-                elif tradeId is not None and tradeId.attrib['tradeIdScheme'] == 'UniqueInternalTradeID':
-                    data['UITID'] = tradeId.text
+                for tradeId in tradeIds:
+                    if tradeId is not None and tradeId.attrib['tradeIdScheme'] == 'http://www.dtcc.com/internal-reference-id' and data['UITID'] == '':
+                        data['UITID'] = tradeId.text
+                    elif tradeId is not None and tradeId.attrib['tradeIdScheme'] == 'UniqueInternalTradeID' and data['UITID'] == '':
+                        data['UITID'] = tradeId.text
 
         return data
 
