@@ -129,6 +129,7 @@ class XMLToJson():
 
 
     def process_file(self, f):
+        print('Processing ' + f)
         file_data = self.read_file(f).replace('\x02', '')
         if file_data.count('<?xml version="1.0" encoding="UTF-8"?>') <= 1:
             try:
@@ -165,9 +166,10 @@ class XMLToJson():
 
 
     def run(self):
+        parent_dir_of_input_dir = os.path.abspath(self.options.input_dir).rstrip('/').rstrip('\\').replace(os.path.basename(self.options.input_dir), '').rstrip('/').rstrip('\\')
         for f in self.get_bz2_files():
 
-            output_f = self.options.output_dir + os.sep + f
+            output_f = os.path.abspath(self.options.output_dir) + os.path.abspath(f).replace(parent_dir_of_input_dir, '')
 
             d = self.process_file(f)
 
