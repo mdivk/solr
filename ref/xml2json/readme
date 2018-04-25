@@ -1,0 +1,20 @@
+I) Use without Installing
+-------------------------
+
+    $ python2.7 xml_to_json.py -r xregion -f xflow -p source_dir -o output.json
+
+
+II) Use after Installing
+------------------------
+
+    To Install:
+    	$ sudo python2.7 setup.py install -f
+
+
+    a) Use as a command from the Shell:
+        $ xml_to_json -r xregion -f xflow -p 2 -o output.json
+
+
+    b) Use as an imported module from a Python program:
+	    >>> from xml_to_json import XMLToJson
+	    >>> XMLToJson('xxregion', 'xxflow', 'projects/imex/2', 'outputt.json').run()
