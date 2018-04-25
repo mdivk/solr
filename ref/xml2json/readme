@@ -24,3 +24,4 @@ Comment:
 2. pls advise how to install lxml
 3. -o should be a folder instead of file, for multiple message in bz2, generated the json with numbering _1, _2...
 4. pls post the latest script on your own repo on github and advise the url here
+5. -p the actual path is like: /region/flow/yyyy/mm/yyyymmdd/data, I would expect to run on /region/flow/yyyy/mm level, and it would be nicer if progressing can be displayed
