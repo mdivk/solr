@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<B3:B3Msg xmlns:B3="http://www.example.org/B3">
+<B3:InitSystem>TPS2</B3:InitSystem>
+<B3:InitSystemRefId>158642</B3:InitSystemRefId>
+<B3:ValueDate>2016-05-13</B3:ValueDate>
+<B3:ProdType>EquityOption</B3:ProdType>
+<B3:StrategyCode/>
+<B3:FirmAccount>1CPB01</B3:FirmAccount>
+<B3:TradeCaptureSystem>TPS2</B3:TradeCaptureSystem><B3:PricingSystem/>
+<B3:SysTradeid>760131961300022HO</B3:SysTradeid>
+<B3:OpsfileId/>
+<B3:UniqueSysTradeid>158642:760131961300022HO</B3:UniqueSysTradeid>
+<B3:DeltaAdjNotional_USD>17.17</B3:DeltaAdjNotional_USD>
+<B3:Corpus><B3:LEG_NUM>1</B3:LEG_NUM>
+<B3:MTM_USD>17.17</B3:MTM_USD>
+<B3:MTM_LOCAL>17.17</B3:MTM_LOCAL>
+<B3:MTM_LOCAL_CURRENCY>USD</B3:MTM_LOCAL_CURRENCY></B3:Corpus>
+<B3:ValueTime>2016-05-13T14:34:56.686Z</B3:ValueTime>
+<B3:Error>
+<B3:ErrorInd>false</B3:ErrorInd>
+<B3:ReasonCode/>
+</B3:Error>
+</B3:B3Msg>
