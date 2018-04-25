@@ -18,3 +18,8 @@ II) Use after Installing
     b) Use as an imported module from a Python program:
 	    >>> from xml_to_json import XMLToJson
 	    >>> XMLToJson('xxregion', 'xxflow', 'projects/imex/2', 'outputt.json').run()
+	    
+Comment: 
+1. no module found for multi threading, please remove multi threading for now;
+2. pls advise how to install lxml
+
