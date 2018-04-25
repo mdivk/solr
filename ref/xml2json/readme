@@ -22,5 +22,5 @@ II) Use after Installing
 Comment: 
 1. no module found for multi threading, please remove multi threading for now;
 2. pls advise how to install lxml
-3. -o should be a folder instead of file
+3. -o should be a folder instead of file, for multiple message in bz2, generated the json with numbering _1, _2...
 4. pls post the latest script on your own repo on github and advise the url here
