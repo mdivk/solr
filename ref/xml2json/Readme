@@ -1,0 +1,16 @@
+I) Use without Installing
+-------------------------
+
+$ python2.7 xml_to_json.py -r xregion -f xflow -p source_dir -o output_dir
+
+1) Multiprocessing is removed
+
+2) Install lxml:
+https://stackoverflow.com/questions/4642942/setup-py-install-lxml-with-python2-6-on-centos
+https://stackoverflow.com/questions/20886069/cant-install-lxml-on-centos/30440011
+
+3) now the output is a directory
+
+4) I can't post anything in your repo. Please make me a contributor to do so..
+
+5) Paths are accepted for input/output. This is fine
