@@ -3,6 +3,8 @@ import re
 import sys
 import bz2
 import json
+import uuid
+import errno
 from glob import glob
 from lxml import etree
 from optparse import OptionParser
@@ -14,10 +16,16 @@ class XMLToJson():
         self.process_options(region, flow, path, output)
 
     def process_options(self, region, flow, path, output):
+        '''
+        Process the Options that the user provided.
+        User could provide this either via commandline or
+        as constructor parameters.
+        '''
+
         parser = OptionParser()
         parser.add_option("-r", "--region", dest="region", help="Enter region", metavar="PATH")
         parser.add_option("-f", "--flow", dest="flow",help="enter flow", metavar="PATH")
-        parser.add_option("-p", "--path", dest="input_dir", help="bz2 file path", metavar="PATH")
+        parser.add_option("-p", "--path", dest="input_path", help="bz2 file path", metavar="PATH")
         parser.add_option("-o", "--output", dest="output_dir", help="json file path", metavar="OUTPUT")
         parser.add_option("-q", "--quiet", action="store_false", dest="verbose", default=True,
                             help="don't print status messages to stdout")
@@ -36,60 +44,65 @@ class XMLToJson():
             else:
                 options.flow = flow
 
-        if not options.input_dir:
+        if not options.input_path:
             if not path:
-                parser.error('input directory not provided (-p option)')
+                parser.error('input path not provided (-p option)')
             else:
-                options.input_dir = path
+                options.input_path = path
 
-        if not os.path.exists(options.input_dir):
-            parser.error('input directory does not exist (-p option)')
+        if not os.path.exists(options.input_path):
+            parser.error('input path does not exist (-p option)')
 
-        if not os.path.isdir(options.input_dir):
-            parser.error('please enter a directory name (-p option)')
+        options.input_path = options.input_path.rstrip('/').rstrip('\\')
 
         if not options.output_dir:
-            if not output:
-                parser.error('output folder not provided (-o option)')
-            else:
-                options.output_dir = output
+            options.output_dir = 'json'
 
         if not os.path.exists(options.output_dir) or not os.path.isdir(options.output_dir):
             os.makedirs(options.output_dir)
 
         self.options = options
 
-
-    def sanitize(self, content):
-        _illegal_unichrs = [(0x00, 0x08), (0x0D, 0x1F), 
-        (0x7F, 0x84), (0x86, 0x9F), (0xFDD0, 0xFDDF), (0xFFFE, 0xFFFF)] 
-
-        if sys.maxunicode >= 0x10000:  # not narrow build 
-                _illegal_unichrs.extend([(0x1FFFE, 0x1FFFF), (0x2FFFE, 0x2FFFF), 
-                                        (0x3FFFE, 0x3FFFF), (0x4FFFE, 0x4FFFF), 
-                                        (0x5FFFE, 0x5FFFF), (0x6FFFE, 0x6FFFF), 
-                                        (0x7FFFE, 0x7FFFF), (0x8FFFE, 0x8FFFF), 
-                                        (0x9FFFE, 0x9FFFF), (0xAFFFE, 0xAFFFF), 
-                                        (0xBFFFE, 0xBFFFF), (0xCFFFE, 0xCFFFF), 
-                                        (0xDFFFE, 0xDFFFF), (0xEFFFE, 0xEFFFF), 
-                                        (0xFFFFE, 0xFFFFF), (0x10FFFE, 0x10FFFF)])
-
-        _illegal_ranges = ["%s-%s" % (chr(low), chr(high)) 
-                        for (low, high) in _illegal_unichrs] 
-        _illegal_xml_chars_RE = re.compile(u'[%s]' % u''.join(_illegal_ranges))
-        
-        content = re.sub(_illegal_xml_chars_RE, "", content)
-        content = re.sub(r"[\x0A-\x0C]", "\n", content)
-        return content
+        if os.path.isfile(options.input_path):
+            self.options.input_is_file = True
+        else:
+            self.options.input_is_file = False
 
 
-    def parseXML(self, xml_data):
+    def create_path_if_not_exists(self, p):
+        '''
+        If the path doesn't exist, create the path - all directories in the given path.
+        '''
+        if not os.path.exists(os.path.dirname(p)):
+            try:
+                print('Creating path ' + os.path.dirname(p))
+                os.makedirs(os.path.dirname(p))
+            except OSError as exc:
+                if exc.errno != errno.EEXIST:
+                    raise
+
+
+    def save_json_file(self, f, data):
+        with open(f, 'w') as fp:
+            json.dump(data, fp)
+        print('Saved ' + f)
+
+
+    def parseXML(self, xml_data, fname):
+        '''
+        Parse the given XML data, extract the required info and
+        return a dict object with some hardcod-ed custom values
+        '''
         root = etree.fromstring(xml_data)
 
         data = {
+            'ID': str(uuid.uuid4()),
             'UITID': '',
+            'TRD_DATE': '',
             'MESSAGE_ID': '',
-            'TRD_DATE': ''
+            'REGION': self.options.region,
+            'FLOW': self.options.flow,
+            'PATH': fname
         }
 
         imexmlTradeNotificationMessageHeader = root.find('imexml:imexmlTradeNotificationMessageHeader', root.nsmap)
@@ -116,7 +129,6 @@ class XMLToJson():
                         data['UITID'] = tradeId.text
                     elif tradeId is not None and tradeId.attrib['tradeIdScheme'] == 'UniqueInternalTradeID' and data['UITID'] == '':
                         data['UITID'] = tradeId.text
-
         return data
 
 
@@ -125,20 +137,18 @@ class XMLToJson():
             file_data = bz2.BZ2File(filename, 'rb')
             return file_data.read()
         except:
-            print('Error while reading ', filename)
+            print('Error while reading ' + filename)
 
 
     def process_file(self, f):
         print('Processing ' + f)
         file_data = self.read_file(f).replace('\x02', '')
+
         if file_data.count('<?xml version="1.0" encoding="UTF-8"?>') <= 1:
             try:
-                d = self.parseXML(file_data)
-                d['REGION'] = self.options.region
-                d['FLOW'] = self.options.flow
-                d['PATH'] = f
+                return self.parseXML(file_data, f)
             except:
-                print('Error while parsing the XML file', f)
+                print('Error while parsing the XML file' + f)
                 return {}
         else:
             d = []
@@ -146,11 +156,7 @@ class XMLToJson():
                 if not xml_data:
                     continue
                 try:
-                    t = self.parseXML(xml_data)
-                    t['REGION'] = self.options.region
-                    t['FLOW'] = self.options.flow
-                    t['PATH'] = f
-                    d.append(t)
+                    d.append(self.parseXML(xml_data, f))
                 except:
                     pass
         return d
@@ -158,38 +164,38 @@ class XMLToJson():
 
     def get_bz2_files(self):
         files_l = []
-        for x in os.walk(self.options.input_dir):
+
+        for x in os.walk(self.options.input_path):
             for y in glob(os.path.join(x[0], '*.bz2')):
                 files_l.append(y)
 
         return files_l
 
 
-    def run(self):
-        parent_dir_of_input_dir = os.path.abspath(self.options.input_dir).rstrip('/').rstrip('\\').replace(os.path.basename(self.options.input_dir), '').rstrip('/').rstrip('\\')
-        for f in self.get_bz2_files():
+    def save_data(self, json_data, output_f):
+            if not json_data:
+                return
 
-            output_f = os.path.abspath(self.options.output_dir) + os.path.abspath(f).replace(parent_dir_of_input_dir, '')
+            self.create_path_if_not_exists(output_f)
 
-            d = self.process_file(f)
-
-            if not d:
-                continue
-
-            if not os.path.exists(os.path.dirname(output_f)):
-                try:
-                    os.makedirs(os.path.dirname(output_f))
-                except OSError as exc: # Guard against race condition
-                    if exc.errno != errno.EEXIST:
-                        raise
-
-            if isinstance(d, (list,)):
-                for i, data in enumerate(d):
-                    with open(output_f + '_' + str(i + 1) + '.json', 'w') as fp:
-                        json.dump(data, fp)
+            if isinstance(json_data, (list,)):
+                for i, each_json_data in enumerate(json_data):
+                    self.save_json_file(output_f + '_' + str(i + 1) + '.json', each_json_data)
             else:
-                with open(output_f + '.json', 'w') as fp:
-                    json.dump(d, fp)
+                self.save_json_file(output_f + '.json', json_data)
+
+
+    def run(self):
+        if self.options.input_is_file:
+            output_f = os.path.join(self.options.output_dir, self.options.input_path)
+            json_data = self.process_file(self.options.input_path)
+            self.save_data(json_data, output_f)
+            return
+
+        for input_f in self.get_bz2_files():
+            output_f = os.path.join(self.options.output_dir, input_f.replace(os.path.dirname(self.options.input_path), ''))
+            json_data = self.process_file(input_f)
+            self.save_data(json_data, output_f)
 
 
 def run_from_cmd():
