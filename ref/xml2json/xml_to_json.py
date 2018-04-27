@@ -10,15 +10,26 @@ from lxml import etree
 from optparse import OptionParser
 
 
+
 class XMLToJson():
+
     def __init__(self, region=None, flow=None, path=None, output=None):
+        '''
+        Create the XMLToJson Object
+        constructor parameters can be omitted if the commandline parameters are passed
+        Usage: python2.7 xml_to_json.py -r xregion -f xflow -p input_path -o output_dir
+        -p input_path can be a directory or an individual .bz2 file
+        -o output_dir is optional. default value is 'json'
+        '''
+
         self.json_data = []
         self.process_options(region, flow, path, output)
 
+
     def process_options(self, region, flow, path, output):
         '''
-        Process the Options that the user provided.
-        User could provide this either via commandline or
+        Process the Options that the user provided
+        either via commandline or
         as constructor parameters.
         '''
 
@@ -71,7 +82,7 @@ class XMLToJson():
 
     def create_path_if_not_exists(self, p):
         '''
-        If the path doesn't exist, create the path - all directories in the given path.
+        If the path doesn't exist, create the path (all directories in the given path)
         '''
         if not os.path.exists(os.path.dirname(p)):
             try:
@@ -86,6 +97,19 @@ class XMLToJson():
         with open(f, 'w') as fp:
             json.dump(data, fp)
         print('Saved ' + f)
+
+
+    def save_data(self, json_data, output_f):
+            if not json_data:
+                return
+
+            self.create_path_if_not_exists(output_f)
+
+            if isinstance(json_data, (list,)):
+                for i, each_json_data in enumerate(json_data):
+                    self.save_json_file(output_f + '_' + str(i + 1) + '.json', each_json_data)
+            else:
+                self.save_json_file(output_f + '.json', json_data)
 
 
     def parseXML(self, xml_data, fname):
@@ -141,8 +165,17 @@ class XMLToJson():
 
 
     def process_file(self, f):
+        '''
+        Process a bz2 file
+        returns either a dict object or a list of dict objects
+        list of dict objects when there are 'multiple' xml file contents in the specified file.
+        '''
         print('Processing ' + f)
         file_data = self.read_file(f).replace('\x02', '')
+        file_data = re.sub(r'<imexml:imexmlTradeNotification\s+xmlns', '<imexml:imexmlTradeNotification xmlns', file_data)
+
+        if file_data.count('<?xml version="1.0" encoding="UTF-8"?>') == 0 and file_data.count('<imexml:imexmlTradeNotification xmlns') > 1:
+            file_data = re.sub(r'<imexml:imexmlTradeNotification xmlns', '<?xml version="1.0" encoding="UTF-8"?><imexml:imexmlTradeNotification xmlns', file_data)
 
         if file_data.count('<?xml version="1.0" encoding="UTF-8"?>') <= 1:
             try:
@@ -163,6 +196,9 @@ class XMLToJson():
 
 
     def get_bz2_files(self):
+        '''
+        Get list of bz2 files in options.input_path
+        '''
         files_l = []
 
         for x in os.walk(self.options.input_path):
@@ -170,19 +206,6 @@ class XMLToJson():
                 files_l.append(y)
 
         return files_l
-
-
-    def save_data(self, json_data, output_f):
-            if not json_data:
-                return
-
-            self.create_path_if_not_exists(output_f)
-
-            if isinstance(json_data, (list,)):
-                for i, each_json_data in enumerate(json_data):
-                    self.save_json_file(output_f + '_' + str(i + 1) + '.json', each_json_data)
-            else:
-                self.save_json_file(output_f + '.json', json_data)
 
 
     def run(self):
@@ -198,8 +221,10 @@ class XMLToJson():
             self.save_data(json_data, output_f)
 
 
+
 def run_from_cmd():
     XMLToJson().run()
+
 
 if __name__ == '__main__':
     XMLToJson().run()
