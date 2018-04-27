@@ -5,6 +5,7 @@ import bz2
 import json
 import uuid
 import errno
+import logging
 from glob import glob
 from lxml import etree
 from optparse import OptionParser
@@ -24,6 +25,7 @@ class XMLToJson():
 
         self.json_data = []
         self.process_options(region, flow, path, output)
+        self.config_logger()
 
 
     def process_options(self, region, flow, path, output):
@@ -80,13 +82,19 @@ class XMLToJson():
             self.options.input_is_file = False
 
 
+    def config_logger(self):
+        logging.basicConfig(filename = 'log.txt', format = '%(asctime)s %(levelname)s %(message)s')
+        self.logger = logging.getLogger('xml_to_json_log')
+        self.logger.setLevel(logging.INFO)
+
+
     def create_path_if_not_exists(self, p):
         '''
         If the path doesn't exist, create the path (all directories in the given path)
         '''
         if not os.path.exists(os.path.dirname(p)):
             try:
-                print('Creating path ' + os.path.dirname(p))
+                self.logger.info('Creating path ' + os.path.dirname(p))
                 os.makedirs(os.path.dirname(p))
             except OSError as exc:
                 if exc.errno != errno.EEXIST:
@@ -96,7 +104,7 @@ class XMLToJson():
     def save_json_file(self, f, data):
         with open(f, 'w') as fp:
             json.dump(data, fp)
-        print('Saved ' + f)
+        self.logger.info('Saved ' + f)
 
 
     def save_data(self, json_data, output_f):
@@ -161,7 +169,7 @@ class XMLToJson():
             file_data = bz2.BZ2File(filename, 'rb')
             return file_data.read()
         except:
-            print('Error while reading ' + filename)
+            self.logger.error('Error while reading ' + filename)
 
 
     def process_file(self, f):
@@ -170,7 +178,7 @@ class XMLToJson():
         returns either a dict object or a list of dict objects
         list of dict objects when there are 'multiple' xml file contents in the specified file.
         '''
-        print('Processing ' + f)
+        self.logger.info('Processing ' + f)
         file_data = self.read_file(f).replace('\x02', '')
         file_data = re.sub(r'<imexml:imexmlTradeNotification\s+xmlns', '<imexml:imexmlTradeNotification xmlns', file_data)
 
@@ -181,7 +189,7 @@ class XMLToJson():
             try:
                 return self.parseXML(file_data, f)
             except:
-                print('Error while parsing the XML file' + f)
+                self.logger.error('Error while parsing the XML file' + f)
                 return {}
         else:
             d = []
@@ -193,6 +201,19 @@ class XMLToJson():
                 except:
                     pass
         return d
+
+
+    def get_bz2_files_count(self):
+        '''
+        Get the count of bz2 files in options.input_path
+        '''
+        count = 0
+
+        for x in os.walk(self.options.input_path):
+            for y in glob(os.path.join(x[0], '*.bz2')):
+                count += 1
+
+        return count
 
 
     def get_bz2_files(self):
@@ -215,10 +236,16 @@ class XMLToJson():
             self.save_data(json_data, output_f)
             return
 
-        for input_f in self.get_bz2_files():
+        total_files = str(self.get_bz2_files_count())
+
+        for i, input_f in enumerate(self.get_bz2_files()):
+            sys.stdout.write("\rProcessing file " + str(i + 1) + "/" + total_files + '...')
+            sys.stdout.flush()
             output_f = os.path.join(self.options.output_dir, input_f.replace(os.path.dirname(self.options.input_path), ''))
             json_data = self.process_file(input_f)
             self.save_data(json_data, output_f)
+
+        print('\nDone!')
 
 
 
