@@ -1,0 +1,39 @@
+Example: 
+
+POST URL: http://solr-server:8983/solr/indexer_odac_shard1_replica2/select?q=order_id%3A180937121tj2&wt=json&indent=true
+Response:
+{
+  "responseHeader":{
+    "status":0,
+    "QTime":0,
+    "params":{
+      "q":"order_id:180937121tj2",
+      "indent":"true",
+      "wt":"json"}},
+  "response":{"numFound":3,"start":0,"docs":[
+      {
+        "order_id":"180937121tj2",
+        "region":"apac",
+        "flow":"apeq",
+        "trade_date":"20180403",
+        "path":"/tmp/solr_data/apac/apeq/odac/2018/04/20180403/data/apeq.qa_hk_rio_apff_to_users1.24.20180403.bz2",
+        "id":"d9ff342e-e472-46a0-83f2-9dad9bc5b497",
+        "_version_":"1598834492450013184"},
+      {
+        "order_id":"180937121tj2",
+        "region":"apac",
+        "flow":"apeq",
+        "trade_date":"20180403",
+        "path":"/tmp/solr_data/apac/apeq/odac/2018/04/20180403/data/apeq.qa_hk_rio_apff_to_users1.24.20180403.bz2",
+        "id":"d09688a0-4caf-4286-aa01-244c1704ec05",
+        "_version_":"1598834793756229632"},
+      {
+        "order_id":"180937121tj2",
+        "region":"apac",
+        "flow":"apeq",
+        "trade_date":"20180403",
+        "path":"/tmp/solr_data/apac/apeq/odac/2018/04/20180403/data/apeq.qa_hk_rio_apff_to_users1.24.20180403.bz2",
+        "id":"99211ee0-01c2-4fde-b14e-275451f4bdec",
+        "_version_":"1598835235186802688"}]
+  }}
+
