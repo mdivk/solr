@@ -74,7 +74,7 @@ def read_file(directory):
 # yield fix_row, '{}/{}'.format(res, each_file.split('.')[0])
 # each_file[:-4]: 'apeq.qa_hk_rio_apares_to_users1.55.20180330.bz2'
 def write_key_value(data):
-    print(data)
+#   print(data)
     data = list(data)
     for each_data in data:
         if each_data[0]:
@@ -99,8 +99,7 @@ def write_key_value(data):
 
                     filename = options.json + '/%s_%s' % (each_data[1].rsplit(".", 1)[0], line) if len(d) > 1 else \
                     each_data[1].rsplit(".", 1)[0]
-                    print('filename:' + filename)
-                    print('%s.json' % filename)
+                    print('file being processed:' + filename)
                     if not os.path.exists(options.json):os.makedirs(options.json)
                     with open('%s.json' % filename, 'w') as json_data:
                         #print('%s.json' % filename)
@@ -109,7 +108,8 @@ def write_key_value(data):
                             json_data
                         )
             except EnvironmentError as e:
-                print('File Not Found (record)'+str(e))
+                #print('Error in bz2 file, details: '+str(e))
+                pass
 
 
 write_key_value(read_file('{p}'.format(p=options.bz2_archive)))
