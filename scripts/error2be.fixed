@@ -1,0 +1,22 @@
+bash-4.1$ python script_p2_0425.py -r apac -f apeq -p /tmp/solr_data/apac/apc/apeq/odac/2018/04/20180413-1/json
+
+
+filename:/tmp/solr_data/apac/apeq/odac/2018/04/20180413-1/json/apeq.uat_tk_cb2_to_rio.77.20180403_450
+/tmp/solr_data/apac/apeq/odac/2018/04/20180413-1/json/apeq.uat_tk_cb2_to_rio.77.20180403_450.json
+File Not Found (record)[Errno 28] No space left on device: '/tmp/solr_data/apac/apeq/odac/2018/04/20180413-1/json/apeq.uat_tk_cb2_to_rio.77.20180403_450.json'
+
+
+
+1. Presumably there are 1012 messages in the bz2 file
+2. The program stucks at 450th message
+
+So, I use 
+ try:
+ ......
+ except EnvironmentError as e:
+                print('Error in bz2 file:'+str(e))
+                pass
+
+Somehow it doesnt pass and continue, re-running the program still stuck at the 450th message and exit
+
+How can I ignore the error and continue?
