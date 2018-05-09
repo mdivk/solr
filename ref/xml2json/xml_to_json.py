@@ -98,6 +98,7 @@ class XMLToJson():
                 self.logger.info('Creating path ' + os.path.dirname(p))
                 os.makedirs(os.path.dirname(p))
             except OSError as exc:
+                self.logger.error(str(exc))
                 if exc.errno != errno.EEXIST:
                     raise
 
@@ -110,14 +111,17 @@ class XMLToJson():
 
     def save_data(self, json_data, output_f):
             if not json_data:
+                self.logger.debug('Not saving as there is no JSON data')
                 return
 
             self.create_path_if_not_exists(output_f)
 
             if isinstance(json_data, (list,)):
+                self.logger.debug('save_data: List of JSONs. Saving one by one')
                 for i, each_json_data in enumerate(json_data):
                     self.save_json_file(output_f + '_' + str(i + 1) + '.json', each_json_data)
             else:
+                self.logger.debug('save_data: Saving ' + output_f + '.json')
                 self.save_json_file(output_f + '.json', json_data)
 
 
@@ -200,7 +204,8 @@ class XMLToJson():
                     continue
                 try:
                     d.append(self.parseXML(xml_data, f))
-                except:
+                except Exception as e:
+                    self.logger.error(str(e))
                     pass
         return d
 
