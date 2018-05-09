@@ -6,6 +6,7 @@ import json
 import uuid
 import errno
 import logging
+import hashlib
 from glob import glob
 from lxml import etree
 from optparse import OptionParser
@@ -85,7 +86,7 @@ class XMLToJson():
     def config_logger(self):
         logging.basicConfig(filename = 'log.txt', format = '%(asctime)s %(levelname)s %(message)s')
         self.logger = logging.getLogger('xml_to_json_log')
-        self.logger.setLevel(logging.INFO)
+        self.logger.setLevel(logging.DEBUG)
 
 
     def create_path_if_not_exists(self, p):
@@ -141,6 +142,7 @@ class XMLToJson():
         imexmlMessageId = imexmlTradeNotificationMessageHeader.find('imexml:imexmlMessageId', root.nsmap)
         if imexmlMessageId is not None:
             data['MESSAGE_ID'] = imexmlMessageId.text
+            data['ID'] = hashlib.sha1(imexmlMessageId.text).hexdigest()
 
         imexmlNotificationBundleDetails = root.find('imexml:imexmlNotificationBundleDetails', root.nsmap)
         imexmlPostEventTrades = imexmlNotificationBundleDetails.find('imexml:imexmlPostEventTrades', root.nsmap)
@@ -231,7 +233,12 @@ class XMLToJson():
 
     def run(self):
         if self.options.input_is_file:
-            output_f = os.path.join(self.options.output_dir, self.options.input_path)
+            output_f = os.path.join(self.options.output_dir, self.options.input_path.strip('/'))
+
+            self.logger.debug('Output file path derived by joining Output directory: ' 
+                + self.options.output_dir + ' and ' + self.options.input_path + ' -' 
+                + output_f)
+
             json_data = self.process_file(self.options.input_path)
             self.save_data(json_data, output_f)
             return
@@ -241,7 +248,13 @@ class XMLToJson():
         for i, input_f in enumerate(self.get_bz2_files()):
             sys.stdout.write("\rProcessing file " + str(i + 1) + "/" + total_files + '...')
             sys.stdout.flush()
-            output_f = os.path.join(self.options.output_dir, input_f.replace(os.path.dirname(self.options.input_path), ''))
+            output_f = os.path.join(self.options.output_dir, input_f.replace(os.path.dirname(self.options.input_path), '').strip('/'))
+
+            self.logger.debug('Output file path derived by joining Output directory: ' + self.options.output_dir + ' and, ')
+            self.logger.debug('input bz2 filename - ' + input_f.replace(os.path.dirname(self.options.input_path), '') 
+                + ' by removing the  parent folderpath -' + os.path.dirname(self.options.input_path) 
+                +  ' from input bz2 file path - ' +  input_f)
+
             json_data = self.process_file(input_f)
             self.save_data(json_data, output_f)
 
