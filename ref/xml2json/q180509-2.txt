@@ -1,0 +1,6 @@
+Stats are to be recorded for audit purpose:
+
+        self.logger.info('Total completed bz2 archives: ' + str(total_files))
+        self.logger.info('Total generated json files: ' + str(idx))
+
+At the moment number of json files is incorrectly generated.
