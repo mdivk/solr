@@ -1,0 +1,11 @@
+        if file_data.count('<?xml version="1.0" encoding="UTF-8"?>') <= 1:
+            try:
+                return self.parseXML(file_data, f)
+            except:
+                self.logger.error('Error while parsing the XML file: ' + f)
+                return {}
+                
+log:
+2018-05-09 21:48:07,009 ERROR Error while parsing the XML file: C:\Users\RX52019\PycharmProjects\FIX_Indexer\test_data_xml\sub2\sub21\tpsctml.uat_us_tpscitiml_to_rio.46.20180413.bz2
+
+file: q180509.xml
