@@ -5,6 +5,8 @@ import hashlib
 import json
 import logging
 import os
+import getpass
+import socket
 import re
 import sys
 from glob import glob
@@ -16,7 +18,7 @@ from values import values, tags
 
 names = dict(zip(tags, values))
 target_bz2 = ""
-
+output_f = ""
 
 class XMLToJson():
     def __init__(self, msgtype=None, region=None, flow=None, path=None, output=None):
@@ -29,8 +31,12 @@ class XMLToJson():
         '''
 
         self.json_data = []
-        self.config_logger()
         self.process_options(msgtype, region, flow, path, output)
+        output_f = os.path.join(self.options.output_dir, self.options.input_path.strip('/'))
+        self.create_log_directory()
+        self.config_logger()
+        self.create_path_if_not_exists(output_f)
+        self.logger_location = ''
 
     def process_options(self, msgtype, region, flow, path, output):
         '''
@@ -95,8 +101,11 @@ class XMLToJson():
         else:
             self.options.input_is_file = False
 
+
     def config_logger(self):
-        logging.basicConfig(filename=datetime.datetime.now().strftime("%Y%m%d%H%M%S") + '.log',
+        global logger_location
+        logger_location = os.getcwd() + '//log//' + datetime.datetime.now().strftime("%Y%m%d%H%M%S") + '.log'
+        logging.basicConfig(filename=logger_location,
                             format='%(asctime)s %(levelname)s %(message)s')
         self.logger = logging.getLogger('xml_to_json_log')
         self.logger.setLevel(logging.DEBUG)
@@ -113,6 +122,14 @@ class XMLToJson():
                 if exc.errno != errno.EEXIST:
                     raise
 
+    def create_log_directory(self):
+        if not os.path.exists(os.getcwd() + '\\log'):
+            try:
+                os.makedirs(os.getcwd() + '\\log')
+            except OSError as ex:
+                pass
+
+
     def save_json_file(self, f, data):
         with open(f, 'w') as fp:
             json.dump(data, fp)
@@ -121,8 +138,6 @@ class XMLToJson():
     def save_data(self, json_data, output_f):
         if not json_data:
             return
-
-        self.create_path_if_not_exists(output_f)
 
         if isinstance(json_data, (list,)):
             for i, each_json_data in enumerate(json_data):
@@ -313,21 +328,22 @@ class XMLToJson():
         return files_l
 
     def run(self):
+        start_time = datetime.datetime.now()
         json_file_cnt = 0
         if self.options.input_is_file:
-            output_f = os.path.join(self.options.output_dir, self.options.input_path.strip('/'))
 
             self.logger.debug('Output file path derived by joining Output directory: '
                               + self.options.output_dir + ' and ' + self.options.input_path + ' -'
-                              + output_f)
+                              + self.options.output_f)
 
             json_data = self.process_file(self.options.msgtype, self.options.input_path)
-            json_file_cnt = self.save_data(json_data, output_f)
+            json_file_cnt = self.save_data(json_data, self.options.output_f)
             return
 
         total_files = str(self.get_bz2_files_count())
 
         idx = 0
+        total_skipped = 0
 
         for idx, input_f in enumerate(self.get_bz2_files()):
             sys.stdout.write("\rProcessing file " + str(idx + 1) + "/" + total_files + '...')
@@ -341,11 +357,34 @@ class XMLToJson():
                               + ' by removing the  parent folderpath -' + os.path.dirname(self.options.input_path)
                               + ' from input bz2 file path - ' + input_f)
 
-            json_data = self.process_file(self.options.msgtype, input_f)
-            json_file_cnt += self.save_data(json_data, output_f)
+            try:
+                self.create_path_if_not_exists(output_f)
+                json_data = self.process_file(self.options.msgtype, input_f)
+                json_file_cnt += self.save_data(json_data, output_f)
 
-        self.logger.info('Total completed bz2 archives: ' + str(total_files))
-        self.logger.info('Total generated json files: ' + str(json_file_cnt))
+                idx += 1
+            except Exception as ex:
+                total_skipped += 1
+                print(str(ex))
+                pass
+
+        stop_time = datetime.datetime.now()
+        elapsed_time = stop_time - start_time
+
+        self.logger.info('=============================================================================================')
+        self.logger.info('Report for the session')
+        self.logger.info('Time the session started: ' + str(start_time))
+        self.logger.info('Time the session ended: ' + str(stop_time))
+        self.logger.info('Time the session costs: ' + str(elapsed_time))
+        self.logger.info('Data processed in this session: ' + self.options.input_path)
+        self.logger.info('Result generated in this session: ' + self.options.output_dir)
+        self.logger.info('Total bz2 archives to be processed: ' + str(total_files))
+        self.logger.info('Total bz2 archives processed: ' + str(idx))
+        self.logger.info('Total bz2 archives failed: ' + str(total_skipped))
+        self.logger.info('Total completed json outputs: ' + str(json_file_cnt))
+        self.logger.info('Log location for this session: ' + logger_location)
+        self.logger.info('Job/report processed by: ' + getpass.getuser() + ' on host: ' + socket.gethostname())
+        self.logger.info('=============================================================================================')
         print('\nDone!')
 
 
