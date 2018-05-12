@@ -39,7 +39,7 @@ class XMLToJson():
                 parser.error('input directory not provided (-p option)')
             else:
                 options.input_dir = path
-
+ 
         if not os.path.exists(options.input_dir):
             parser.error('input directory does not exist (-p option)')
 
