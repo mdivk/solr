@@ -339,48 +339,6 @@ class XMLToJson():
     def run(self):
         start_time = datetime.datetime.now()
         json_file_cnt = 0
-        # if self.options.input_is_file:
-        #
-        #     total_files = 1
-        #     idx = 1
-        #     total_skipped = 0
-        #
-        #     self.logger.debug('Output file path derived by joining Output directory: '
-        #                       + self.options.output_dir + ' and ' + self.options.input_path + ' -'
-        #                       + self.options.output_dir)
-        #
-        #     try:
-        #         json_data = self.process_file(self.options.msgtype, self.options.input_path)
-        #         json_file_cnt = self.save_data(json_data, self.options.output_dir)
-        #     except Exception as ex:
-        #         total_skipped += 1
-        #         self.logger.error('Error: ' + str(ex))
-        #
-        #     stop_time = datetime.datetime.now()
-        #     elapsed_time = stop_time - start_time
-        #
-        #     self.logger.info(
-        #         '=============================================================================================')
-        #     self.logger.info('Report for the session')
-        #     self.logger.info('Time the session started: ' + str(start_time))
-        #     self.logger.info('Time the session ended: ' + str(stop_time))
-        #     self.logger.info('Time the session costs: ' + str(elapsed_time))
-        #     self.logger.info('Data Type processed in this session: ' + self.options.msgtype)
-        #     self.logger.info('Data Region processed in this session: ' + self.options.region)
-        #     self.logger.info('Data Flow processed in this session: ' + self.options.flow)
-        #     self.logger.info('Data processed in this session: ' + self.options.input_path)
-        #     self.logger.info('Result generated in this session: ' + self.options.output_dir)
-        #     self.logger.info('Total bz2 archives to be processed: ' + str(total_files))
-        #     self.logger.info('Total bz2 archives processed: ' + str(idx))
-        #     self.logger.info('Total bz2 archives failed: ' + str(total_skipped))
-        #     self.logger.info('Total completed json outputs: ' + str(json_file_cnt))
-        #     self.logger.info('Log location for this session: ' + logger_location)
-        #     self.logger.info('Job/report processed by: ' + getpass.getuser() + ' on host: ' + socket.gethostname())
-        #     self.logger.info(
-        #         '=============================================================================================')
-        #     print('\nDone!')
-        #
-        #     return
 
         total_files = str(self.get_bz2_files_count())
 
