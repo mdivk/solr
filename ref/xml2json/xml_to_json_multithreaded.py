@@ -11,7 +11,9 @@ from glob import glob
 from lxml import etree
 from optparse import OptionParser
 from threading import Thread
+from time import sleep
 
+MAX_THREADS = 20
 
 class XMLToJson():
 
@@ -267,8 +269,15 @@ class XMLToJson():
         threads = []
 
         for i, input_f in enumerate(self.get_bz2_files()):
+            threads = [a for a in threads if a.isAlive()]
+            
+            while len(threads) >= MAX_THREADS:
+                sleep(0.1)
+                threads = [a for a in threads if a.isAlive()]
+
             t = Thread(target=self.worker_func, args=(input_f, i))
             threads.append(t)
+            # self.logger.debug('Number of active threads: ' + str(len([a for a in threads if a.isAlive()])))           
             t.start()
         
         for t in threads:
