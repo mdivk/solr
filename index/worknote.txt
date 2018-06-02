@@ -1,0 +1,3 @@
+20180601: 
+completed: basic framework to generate index command based on folder
+to-do: to work on getting the actual files in the folder and generate the index command
