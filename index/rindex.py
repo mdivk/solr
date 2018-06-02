@@ -8,13 +8,14 @@ SOLR_URL = ''
 POST_JAR_URL = 'opt/cloudera/parcels/CDH/jars/post.jar'
 
 single_day = ''
-solr_server=''
+solr_server = ''
 collection = ''
 json_loc_base = '/usr/indexer/'
 json_loc = ''
 index_command_base = 'java -Dtype=application/json -Drecursive -Durl='
 index_command = ''
 solr_instance_detail = ''
+flow_name_loc = ''
 
 class rindex():
     def __init__(self, solr_server=None, collection=None, flow_name=None, flow_days=None):
@@ -23,8 +24,9 @@ class rindex():
 
     def process_options(self, solr_server, collection, flow_name, flow_days):
         parser = OptionParser()
-        parser.add_option("-s", "--solr_instance_detail", dest="solr_instance_detail", help="Enter solr_instance_detail")
-        #parser.add_option("-c", "--collection", dest="collection", help="Enter solr collection")
+        parser.add_option("-s", "--solr_instance_detail", dest="solr_instance_detail",
+                          help="Enter solr_instance_detail")
+        # parser.add_option("-c", "--collection", dest="collection", help="Enter solr collection")
         parser.add_option("-f", "--flow_name", dest="flow_name", help="Enter flow_name file")
         parser.add_option("-d", "--flow_days", dest="flow_days", help="enter flow_day file")
 
@@ -39,7 +41,6 @@ class rindex():
             solr_server = the_solr_instance_detail[0].split('|')[0]
             collection = the_solr_instance_detail[0].split('|')[1]
 
-
         if not options.flow_name:
             if not flow_name:
                 parser.error('flow name not provided (-f option)')
@@ -48,8 +49,8 @@ class rindex():
             if not flow_days:
                 parser.error('flow days not provided (-d option)')
 
-        #self.options = options
-        self.read_flow_days(options.flow_days, options.flow_days)
+        # self.options = options
+        self.read_flow_days(solr_server, collection, options.flow_name, options.flow_days)
 
     def read_file(self, filename):
         try:
@@ -57,7 +58,7 @@ class rindex():
         except:
             self.logger.error('Error while reading ' + filename)
 
-    def single_rindex(self, json_loc):
+    def single_rindex(self, solr_server, collection, flow_name, flow_days, json_loc):
 
         # print warning?
         # read solr server and compose the SOLR_URL
@@ -68,21 +69,35 @@ class rindex():
         print(index_command)
         # os.system(single_command)
 
-    def read_flow_days(self, flow_name, flow_days):
+    def read_flow_name(self, flow_name):
+        global flow_name_loc
+        with open(flow_name) as f:
+            r = f.readlines()
+            # you may also want to remove whitespace characters like `\n` at the end of each line
+        r = [x.strip() for x in r]
+        flow_name_loc = r[0]
+
+    def read_flow_days(self, solr_server, collection, flow_name, flow_days):
         with open(flow_days) as f:
             content = f.readlines()
         # you may also want to remove whitespace characters like `\n` at the end of each line
         content = [x.strip() for x in content]
 
+        self.read_flow_name(flow_name)
+        print(flow_name_loc)
+
+
         # now we have the date for the json files to be indexed
         for i, each_date in enumerate(content):
-            json_loc = json_loc_base + flow_name + '/json/' + each_date
-            #print(json_loc)
-            self.single_rindex(json_loc)
+            json_loc = json_loc_base + flow_name_loc + '/json/' + each_date
+            # print(json_loc)
+            self.single_rindex(solr_server, collection, flow_name, flow_days, json_loc)
         return i + 1
+
 
     def run(self):
         print('\nDone!')
+
 
 if __name__ == '__main__':
     rindex().run()
