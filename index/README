@@ -1,0 +1,78 @@
+Steps to set up the environment:
+1. Using the generate_test_data.sh to generate the needed test dataset, save the files into 4 folders like:
+   20180401 (1-2500)
+   20180402 (2500-5000)
+   20180403 (5001-7500)
+   20180404 (7501-10000)
+2. Folders hierachy:
+   rindex.py
+   \job\flow_days.txt
+   \job\flow_name.txt
+   \job\solr_instance_detail.txt
+   \json
+   \json\citifix
+   \json\citifix\region
+   \json\citifix\region\flow
+   \json\citifix\region\flow\20180401
+   \json\citifix\region\flow\20180402
+   \json\citifix\region\flow\20180403
+   \json\citifix\region\flow\20180404
+
+3. flow_name.txt: this file is the file's metadata, leave it as it is
+   region/flow
+
+4. flow_days.txt: this file controls what dates to be processed by the rindex.py
+   20180401
+   20180402
+   
+5. Script rindex.py explain:
+
+5.1 in run(): each folder will be given a thread to process
+        for i, each_date in enumerate(cur_flow_days):
+            threads = [a for a in threads if a.isAlive()]
+
+            while len(threads) >= MAX_THREADS:
+                sleep(3)
+                threads = [a for a in threads if a.isAlive()]
+
+            json_loc = json_loc_base + flow_name_loc + '/' + each_date
+
+            t = Thread(target=self.worker_func, args=(solr_server, collection, flow_name, flow_days, json_loc, i))
+            threads.append(t)
+
+            t.start()
+
+        for t in threads:
+            t.join()
+
+5.2 in worker_func: each file will be iterated in the given folder, a command (string) is concatenated from the file's name together with some other Global environment variables
+    the command will be printed out to the console.
+    
+        def worker_func(self, solr_server, collection, flow_name, flow_days, json_loc, i):
+
+        # read solr server and compose the SOLR_URL
+        SOLR_URL = 'http://' + solr_server + DOMAIN + collection + '/update/json/docs'
+        # reaad entries from folder of flow_days
+
+        for json_file in self.files(json_loc):
+            try:
+                index_command = "\r" + index_command_base + SOLR_URL + ' -jar ' + POST_JAR_URL + ' ' + single_day + ' ' + json_loc + '/' + json_file
+            except Exception as e:
+                print(str(e))
+
+            print(index_command)
+            #sleep(0.1)
+
+
+
+6. Issue/finding:
+My testing is in flow_days.txt, if only one day(folder), all the files will get processed as expected.
+If two or more dates are indicated in the \job\flow_days.txt, some files for either of the folders will not be printed.
+My testing seems suggesting sleep() might play some role here, i.e. if I add sleep(DELAY) after print(index_command), the number of 
+skipped files will be different.
+
+
+   
+   
+   
+   
