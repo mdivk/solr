@@ -7,4 +7,4 @@ completed: added the multi threading
 to-do: the multi threading is not really working! for the testing dataset, some records are skipped for reason to be identified
 
 20180603:
-completed: upload the script to generate the test dataset
+completed: upload the script generate_test_data.sh to generate the test dataset
