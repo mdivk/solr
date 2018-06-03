@@ -1,3 +1,10 @@
 20180601: 
 completed: basic framework to generate index command based on folder
 to-do: to work on getting the actual files in the folder and generate the index command
+
+20180602:
+completed: added the multi threading 
+to-do: the multi threading is not really working! for the testing dataset, some records are skipped for reason to be identified
+
+20180603:
+completed: upload the script to generate the test dataset
