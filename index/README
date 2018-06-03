@@ -1,9 +1,26 @@
 Steps to set up the environment:
+
+There are a simple shell script to generate the test data
+There are a few control files to indicate Environment Parameters
+
 1. Using the generate_test_data.sh to generate the needed test dataset, save the files into 4 folders like:
+
+   generate_test_data.sh
+
+   for number in {1..2500}
+   do
+   touch $number
+   done
+   exit 0
+
+   The script will generate:
    20180401 (1-2500)
+
+   Modify the range to generate more data for the following folders:
    20180402 (2500-5000)
    20180403 (5001-7500)
    20180404 (7501-10000)
+
 2. Folders hierachy:
    rindex.py
    \job\flow_days.txt
@@ -18,16 +35,19 @@ Steps to set up the environment:
    \json\citifix\region\flow\20180403
    \json\citifix\region\flow\20180404
 
-3. flow_name.txt: this file is the file's metadata, leave it as it is
+3. flow_name.txt: indicates Global Environment parameters, leave it as it is
    region/flow
 
-4. flow_days.txt: this file controls what dates to be processed by the rindex.py
+4. flow_days.txt: this file controls what folders(dates) to be processed by the rindex.py
    20180401
    20180402
    
-5. Script rindex.py explain:
+5. solr_instance_detail.txt: indicates Global Environment parameters, leave it as it is
+   solr_server|collection_name
+   
+6. Script rindex.py explain:
 
-5.1 in run(): each folder will be given a thread to process
+6.1 in run(): each folder will be given a thread to process
         for i, each_date in enumerate(cur_flow_days):
             threads = [a for a in threads if a.isAlive()]
 
@@ -45,7 +65,7 @@ Steps to set up the environment:
         for t in threads:
             t.join()
 
-5.2 in worker_func: each file will be iterated in the given folder, a command (string) is concatenated from the file's name together with some other Global environment variables
+6.2 in worker_func: each file will be iterated in the given folder, a command (string) is concatenated from the file's name together with some other Global environment variables
     the command will be printed out to the console.
     
         def worker_func(self, solr_server, collection, flow_name, flow_days, json_loc, i):
@@ -65,13 +85,27 @@ Steps to set up the environment:
 
 
 
-6. Issue/finding:
+7. Issue/finding:
+I am using pycharm community 2018.1, python 2.7
 My testing is in flow_days.txt, if only one day(folder), all the files will get processed as expected.
 If two or more dates are indicated in the \job\flow_days.txt, some files for either of the folders will not be printed.
 My testing seems suggesting sleep() might play some role here, i.e. if I add sleep(DELAY) after print(index_command), the number of 
 skipped files will be different.
 
+8. part of the output result:
+java -Dtype=application/json -Drecursive -Durl=http://solr_server:8983/solr/collection_name/update/json/docs -jar opt/cloudera/parcels/CDH/jars/post.jar  json/citifix/region/flow/20180401/1486
 
+java -Dtype=application/json -Drecursive -Durl=http://solr_server:8983/solr/collection_name/update/json/docs -jar opt/cloudera/parcels/CDH/jars/post.jar  json/citifix/region/flow/20180403/5543
+java -Dtype=application/json -Drecursive -Durl=http://solr_server:8983/solr/collection_name/update/json/docs -jar opt/cloudera/parcels/CDH/jars/post.jar  json/citifix/region/flow/20180401/1487
+java -Dtype=application/json -Drecursive -Durl=http://solr_server:8983/solr/collection_name/update/json/docs -jar opt/cloudera/parcels/CDH/jars/post.jar  json/citifix/region/flow/20180401/1488
+java -Dtype=application/json -Drecursive -Durl=http://solr_server:8983/solr/collection_name/update/json/docs -jar opt/cloudera/parcels/CDH/jars/post.jar  json/citifix/region/flow/20180403/5544
+java -Dtype=application/json -Drecursive -Durl=http://solr_server:8983/solr/collection_name/update/json/docs -jar opt/cloudera/parcels/CDH/jars/post.jar  json/citifix/region/flow/20180401/1489
+
+java -Dtype=application/json -Drecursive -Durl=http://solr_server:8983/solr/collection_name/update/json/docs -jar opt/cloudera/parcels/CDH/jars/post.jar  json/citifix/region/flow/20180403/5546
+java -Dtype=application/json -Drecursive -Durl=http://solr_server:8983/solr/collection_name/update/json/docs -jar opt/cloudera/parcels/CDH/jars/post.jar  json/citifix/region/flow/20180401/149
+java -Dtype=application/json -Drecursive -Durl=http://solr_server:8983/solr/collection_name/update/json/docs -jar opt/cloudera/parcels/CDH/jars/post.jar  json/citifix/region/flow/20180403/5547
+
+You can see the above result contains two skipped prints. The try block doesn't catch any exception.
    
    
    
