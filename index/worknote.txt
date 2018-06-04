@@ -8,3 +8,7 @@ to-do: the multi threading is not really working! for the testing dataset, some 
 
 20180603:
 completed: upload the script generate_test_data.sh to generate the test dataset
+
+20180603:
+Completed: multi-threading is working
+To-DO: to add the report in the log, to catch error for some places if exist, to test on linux
