@@ -2,7 +2,11 @@ import os
 import sys
 from optparse import OptionParser
 from time import sleep
-from threading import Thread
+import datetime
+from threading import Thread, current_thread, Lock
+import threading
+import time
+import logging
 
 # Usage:
 # rindex.py -T job/flow_name.txt -D job/flow_days.txt
@@ -10,12 +14,16 @@ from threading import Thread
 
 SOLR_URL = ''
 POST_JAR_URL = 'opt/cloudera/parcels/CDH/jars/post.jar'
+DOMAIN = '.nam.nsroot.net:8983/solr/'
+
 MAX_THREADS = 10
 
 single_day = ''
 solr_server = ''
 collection = ''
-json_loc_base = '/usr/indexer/'
+# json_loc_base = '/usr/indexer/'
+json_loc_base = 'json/citifix/'  # note, the json loc base is to be replaced by the commented one when tested in work
+
 json_loc = ''
 index_command_base = 'java -Dtype=application/json -Drecursive -Durl='
 index_command = ''
@@ -30,6 +38,15 @@ class rindex():
     def __init__(self, solr_server=None, collection=None, flow_name=None, flow_days=None):
         self.json_file = ''
         self.process_options(solr_server, collection, flow_name, flow_days)
+        self.config_logger()
+
+    def config_logger(self):
+        global logger_location
+        logger_location = os.getcwd() + '\\log\\' + datetime.datetime.now().strftime("%Y%m%d%H%M%S") + '.log'
+        print("logger_location:" + logger_location)
+        logging.basicConfig(filename=logger_location, format='%(asctime)s %(levelname)s %(message)s')
+        self.logger = logging.getLogger('index_log')
+        self.logger.setLevel(logging.DEBUG)
 
     def process_options(self, the_solr_server, the_collection, the_flow_name, the_flow_days):
 
@@ -79,16 +96,6 @@ class rindex():
 
         return files_list
 
-    def single_rindex(self, solr_server, collection, flow_name, flow_days, json_loc):
-
-        # print warning?
-        # read solr server and compose the SOLR_URL
-        SOLR_URL = 'http://' + solr_server + '.nam.nsroot.net:8983/solr/' + collection + '/update/json/docs'
-        # reaad entries from flow_days
-        index_command = index_command_base + SOLR_URL + ' -jar ' + POST_JAR_URL + ' ' + single_day + ' ' + json_loc
-        print(index_command)
-        # os.system(single_command)
-
     def read_flow_name(self, flow_name):
         global flow_name_loc
         with open(flow_name) as f:
@@ -107,48 +114,57 @@ class rindex():
 
         return flow_days
 
-    def worker_func(self, solr_server, collection, flow_name, flow_days, json_loc):
-        sys.stdout.write("\rProcessing file " + str(i + 1) + "/" + self.total_files + '...')
-        sys.stdout.flush()
+    def files(self, path):
+        for file in os.listdir(path):
+            if os.path.isfile(os.path.join(path, file)):
+                yield file
 
-        self.single_rindex(solr_server, collection, flow_name, flow_days, json_loc)
+    # the worker is to process the assigned folder
+    def worker_func(self, solr_server, collection, flow_name, flow_days, json_loc, i, lock):
+        lock.acquire()
+        print("Current thread: " + threading.current_thread().getName())
+        # read solr server and compose the SOLR_URL
+        SOLR_URL = 'http://' + solr_server + '.domain.net:8983/solr/' + collection + '/update/json/docs'
+        # reaad entries from folder of flow_days
+
+        for json_file in self.files(json_loc):
+            self.logger.info('Processing: ' + json_file)
+            index_command = "\r" + index_command_base + SOLR_URL + ' -jar ' + POST_JAR_URL + ' ' + single_day + ' ' + json_loc + '/' + json_file
+            print(index_command)
+
+        lock.release()
 
 
+    # The following code is for MultiThreading, only to be uncommented after the single Thread is working as expected:
+    # Multi threading is created based on each day in the flow_days, each day will get a Thread assigned to it
     def run(self):
-        # self.options = options
-
-        # now we have the date for the json files to be indexed
-
         cur_flow_days = []
         cur_flow_days = self.read_flow_days(solr_server, collection, flow_name, flow_days)
 
-        for i, each_date in enumerate(cur_flow_days):
-            # for each flow_day, start a Thread to process it, max is 10
-            json_loc = json_loc_base + flow_name_loc + '/json/' + each_date
-            # print(json_loc)
-            self.single_rindex(solr_server, collection, flow_name, flow_days, json_loc)
+        cur_flow_name = ''
+        cur_flow_name = self.read_flow_name(flow_name)
 
-        print('\nDone!')
+        lock = Lock()
 
+        threads = []
 
-'''     
-The following code is for MultiThreading, only to be uncommented after the single Thread is working as expected:
-   
         for i, each_date in enumerate(cur_flow_days):
             threads = [a for a in threads if a.isAlive()]
 
             while len(threads) >= MAX_THREADS:
-                sleep(0.1)
+                sleep(3)
                 threads = [a for a in threads if a.isAlive()]
 
-            t = Thread(target=self.worker_func, args=(input_f, i))
+            json_loc = json_loc_base + flow_name_loc + '/' + each_date
+
+            t = Thread(target=self.worker_func, args=[solr_server, collection, flow_name, flow_days, json_loc, i, lock])
             threads.append(t)
-            # self.logger.debug('Number of active threads: ' + str(len([a for a in threads if a.isAlive()])))           
+
             t.start()
 
         for t in threads:
             t.join()
-'''
+
 
 if __name__ == '__main__':
     rindex().run()
