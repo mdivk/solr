@@ -1,5 +1,4 @@
 import os
-import sys
 from optparse import OptionParser
 from time import sleep
 import datetime
@@ -7,6 +6,8 @@ from threading import Thread, current_thread, Lock
 import threading
 import time
 import logging
+import getpass
+import socket
 
 # Usage:
 # rindex.py -T job/flow_name.txt -D job/flow_days.txt
@@ -96,6 +97,10 @@ class rindex():
 
         return files_list
 
+    def get_total_file_num(self, folder):
+
+        return len([name for name in os.listdir(folder) if os.path.isfile(os.path.join(folder, name))])
+
     def read_flow_name(self, flow_name):
         global flow_name_loc
         with open(flow_name) as f:
@@ -138,8 +143,17 @@ class rindex():
     # The following code is for MultiThreading, only to be uncommented after the single Thread is working as expected:
     # Multi threading is created based on each day in the flow_days, each day will get a Thread assigned to it
     def run(self):
+
+        start_time = datetime.datetime.now()
+
         cur_flow_days = []
         cur_flow_days = self.read_flow_days(solr_server, collection, flow_name, flow_days)
+
+        total_files = 0
+        sub = 0
+        for i, each_flow_day in enumerate(cur_flow_days):
+            sub = self.get_total_file_num(each_flow_day)
+            total_files = total_files + sub
 
         cur_flow_name = ''
         cur_flow_name = self.read_flow_name(flow_name)
@@ -164,6 +178,24 @@ class rindex():
 
         for t in threads:
             t.join()
+
+        stop_time = datetime.datetime.now()
+        elapsed_time = stop_time - start_time
+
+        self.logger.info('====================================Indexing Report====================================')
+        self.logger.info('Time the indexing started: ' + str(start_time))
+        self.logger.info('Time the indexing ended: ' + str(stop_time))
+        self.logger.info('Time the indexing costs: ' + str(elapsed_time))
+        self.logger.info('Solr Server: ' + solr_server)
+        self.logger.info('Solr Collection Name: ' + collection)
+        self.logger.info('Solr URL: ' + SOLR_URL)
+        self.logger.info('Index Location: ' + self.options.input_path)  #To be updated with the HDFS location from the SOLR Overview for the collection
+        self.logger.info('Total Documents to be indexed: ' + str(total_files))
+#        self.logger.info('Total Documents indexed: ' + str(idx))
+#        self.logger.info('Total Documents skipped: ' + str(total_skipped))
+        self.logger.info('Log location for this session: ' + logger_location)
+        self.logger.info('Job/report processed by: ' + getpass.getuser() + ' on host: ' + socket.gethostname())
+        self.logger.info('=============================================================================================')
 
 
 if __name__ == '__main__':
