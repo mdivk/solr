@@ -107,6 +107,7 @@ java -Dtype=application/json -Drecursive -Durl=http://solr_server:8983/solr/coll
 
 You can see the above result contains two skipped prints. The try block doesn't catch any exception.
    
-   
+
+Issue fixed with lock put in place
    
    
