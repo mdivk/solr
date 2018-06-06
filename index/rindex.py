@@ -20,10 +20,12 @@ DOMAIN = '.nam.nsroot.net:8983/solr/'
 MAX_THREADS = 10
 
 single_day = ''
+region = ''
+flow = ''
 solr_server = ''
 collection = ''
 json_loc_base = '/usr/indexer/data/'
-#json_loc_base = 'json/citifix/'  # note, the json loc base is to be replaced by the commented one when tested in work
+#json_loc_base = 'json/fix/'  # note, the json loc base is to be replaced by the commented one when tested in work
 
 json_loc = ''
 index_command_base = 'java -Dtype=application/json -Drecursive -Durl='
@@ -76,8 +78,13 @@ class rindex():
             if not the_flow_name:
                 parser.error('flow name not provided (-f option)')
         else:
-            global flow_name
-            flow_name = options.flow_name
+            with open(options.flow_name) as f:
+                flow_name = f.readlines()
+
+            global region
+            global flow
+            region = flow_name[0].split('|')[0]
+            flow = flow_name[0].split('|')[1]
 
         if not options.flow_days:
             if not the_flow_days:
@@ -99,7 +106,7 @@ class rindex():
 
     def get_total_file_num(self, folder):
 
-        return len([name for name in os.listdir("data/citifix/apac/apeq/" + folder) if os.path.isfile(os.path.join("data/citifix/apac/apeq/" + folder, name))])
+        return len([name for name in os.listdir("data/" + region + "/" + flow + "/" + folder) if os.path.isfile(os.path.join("data/" + region + "/" + flow + "/" + folder, name))])
 
     def read_flow_name(self, flow_name):
         global flow_name_loc
