@@ -22,8 +22,8 @@ MAX_THREADS = 10
 single_day = ''
 solr_server = ''
 collection = ''
-# json_loc_base = '/usr/indexer/'
-json_loc_base = 'json/citifix/'  # note, the json loc base is to be replaced by the commented one when tested in work
+json_loc_base = '/usr/indexer/data/'
+#json_loc_base = 'json/citifix/'  # note, the json loc base is to be replaced by the commented one when tested in work
 
 json_loc = ''
 index_command_base = 'java -Dtype=application/json -Drecursive -Durl='
@@ -99,7 +99,7 @@ class rindex():
 
     def get_total_file_num(self, folder):
 
-        return len([name for name in os.listdir(folder) if os.path.isfile(os.path.join(folder, name))])
+        return len([name for name in os.listdir("data/citifix/apac/apeq/" + folder) if os.path.isfile(os.path.join("data/citifix/apac/apeq/" + folder, name))])
 
     def read_flow_name(self, flow_name):
         global flow_name_loc
