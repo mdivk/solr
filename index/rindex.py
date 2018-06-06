@@ -10,8 +10,7 @@ import getpass
 import socket
 
 # Usage:
-# rindex.py -T job/flow_name.txt -D job/flow_days.txt
-# log: /log/index
+# rindex.py -s job/solr_instance_detail.txt -f job/flow_name.txt -d job/flow_days.txt
 
 SOLR_URL = ''
 POST_JAR_URL = 'opt/cloudera/parcels/CDH/jars/post.jar'
