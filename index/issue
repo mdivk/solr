@@ -1,0 +1,18 @@
+bash-4.1$ /opt/cloudera/parcels/Anaconda2/bin/python /usr/indexer/bin/rindex.py -s conf/solr_instance_detail.txt -f conf/flow_name.txt -d conf/flow_days.txt
+logger_location:/usr/indexer/log20180607000608.log
+Current thread: Thread-1
+POST_JAR_URL:/opt/cloudera/parcels/CDH/jars/post.jar
+java -Dtype=application/json -Drecursive -Durl="http://solr_server:8983/solr/indexer_demo_fix/update/json/docs" -jar /opt/cloudera/parcels/CDH/jars/post.jar  /usr/indexer/data/apac/apeq/20180402/apeq.qa_hk_rio_apares_to_users1.32.20180402.bz2.json
+java: command not found
+Current thread: Thread-2
+POST_JAR_URL:/opt/cloudera/parcels/CDH/jars/post.jar
+java -Dtype=application/json -Drecursive -Durl="http://solr_server:8983/solr/indexer_demo_fix/update/json/docs" -jar /opt/cloudera/parcels/CDH/jars/post.jar  /usr/indexer/data/apac/apeq/20180410/apeq.qa_hk_rio_apff_to_users2.44.20180410.bz2.json
+java: command not found
+bash-4.1$ java -Dtype=application/json -Drecursive -Durl="http://solr_server:8983/solr/indexer_demo_fix/update/json/docs" -jar /opt/cloudera/parcels/CDH/jars/post.jar  /usr/indexer/data/apac/apeq/20180402/apeq.qa_hk_rio_apares_to_users1.32.20180402.bz2.json
+SimplePostTool version 1.5
+Posting files to base url http://solr_server:8983/solr/indexer_demo_fix/update/json/docs using content-type application/json..
+Entering recursive mode, max depth=999, delay=0s
+POSTing file apeq.qa_hk_rio_apares_to_users1.32.20180402.bz2.json
+1 files indexed.
+COMMITting Solr index changes to http://solr_server:8983/solr/indexer_demo_fix/update/json/docs..
+Time spent: 0:00:00.948
