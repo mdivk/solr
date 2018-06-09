@@ -1,3 +1,7 @@
-solrctl instancedir --generate $HOME/indexer_demo_fix
-solrctl instancedir --create indexer_demo_fix $HOME/indexer_demo_fix
-solrctl collection --create indexer_demo_fix -s 1 -r 2
+#!/bin/bash
+#Created on: 20180529
+#Author: RX
+echo "solrctl instancedir --generate $HOME/$1"
+echo "solrctl instancedir --create $1 $HOME/$1"
+echo "solrctl collection --create $1 -s 1 -r 2"
+
