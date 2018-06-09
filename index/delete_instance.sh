@@ -1,3 +1,7 @@
-http://dsnyr002d02i1d.nam.nsroot.net:8983/solr/admin/collections?action=DELETE&name=indexer_demo_fix
-solrctl instancedir --delete  indexer_demo_fix
-rm -r $HOME/indexer_demo_fix
+#!/bin/bash
+#Created on: 20180529
+#Author: RX
+#Usage:
+#./delete_instance.sh <solr_hostname> <collection_name> 
+echo "http://"$1".nam.nsroot.net:8983/solr/admin/collections?action=DELETE&name=$2"
+
