@@ -1,0 +1,5 @@
+msgtype=fix
+region=apac
+flow=apeq
+path=odac\apac\apeq\20180401
+output=json\apac\apeq\20180401
