@@ -1,0 +1,41 @@
+parsing
+
+Usage: 
+/opt/cloudera/parcels/Anaconda2/bin/python /usr/indexer/current/bin/rparser.py -c /usr/indexer/current/conf/conf.parser
+
+1. prepare the configuration at conf/con
+
+example:
+
+bash-4.1$ cat conf.parser 
+msgtype=fix
+region=apac
+flow=apeq
+path=/odac/apac/apeq/odac/2018/04/20180323/data
+output=/usr/indexer/current/json/apac/apeq/20180323
+
+Note:
+Double check the source on WORM drive to ensure it exists
+
+
+2. run the parser
+/opt/cloudera/parcels/Anaconda2/bin/python /usr/indexer/current/bin/rparser.py -c /usr/indexer/current/conf/conf.parser
+
+
+indexing
+
+Usage: 
+/usr/indexer/current/bin/rindex.sh
+
+Prepare the configuration:
+1. data location:
+bash-4.1$ cat conf.indexer
+/usr/indexer/current/json/apac/apeq/20180323
+
+2. solr server
+bash-4.1$ cat conf.solr_server 
+solr_server:8983/solr/
+
+3. solr collection
+bash-4.1$ cat conf.collection 
+indexer_demo_fix
