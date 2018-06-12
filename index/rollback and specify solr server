@@ -1,0 +1,22 @@
+Roll back procedure:
+
+example: collection: indexer_demo_fix 
+Delete the collection:
+
+1. http://solr_server1:8983/solr/admin/collections?action=DELETE&name=indexer_demo_fix
+
+2. solrctl instancedir --delete  indexer_demo_fix
+
+Recreate indexer_demo_fix
+
+3. delete the residual folder
+rm -r $HOME/indexer_demo_fix
+
+4.	Create instance
+solrctl instancedir --generate $HOME/indexer_demo_fix
+
+5.	Propagate schema
+solrctl instancedir --create indexer_demo_fix $HOME/indexer_demo_fix
+
+6.	Create collection, specify the Solr server
+solrctl collection --create indexer_demo_fix -s 1 -r 2 -n solr_server1:8983_solr,solr_server1:8983_solr
